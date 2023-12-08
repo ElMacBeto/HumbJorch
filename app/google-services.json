@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1096028603631",
+    "project_id": "humbjorch",
+    "storage_bucket": "humbjorch.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1096028603631:android:4f8f5ac364de8f0f2d871a",
+        "android_client_info": {
+          "package_name": "com.humbjorch.myapplication"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCTpg5wfJSKgLiT_TlWH7a4BA8e-OsM_nk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
