@@ -121,6 +121,7 @@
             android:layout_marginEnd="@dimen/dp16"
             android:clickable="true"
             android:focusable="true"
+            android:foreground="@drawable/foreground_grey"
             app:cardElevation="@dimen/dp16"
             app:cardCornerRadius="@dimen/dp8"
             app:layout_constraintBottom_toBottomOf="parent"

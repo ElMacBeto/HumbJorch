@@ -23,5 +23,7 @@
     <string name="tv_login_touch_id_description">Use your Touch ID for faster, easier access \nto your account</string>
     <string name="label_use_touch_id">Use Touch ID</string>
     <string name="label_login_with_email"><u>Login with Email</u></string>
+    <string name="error_name">invalid name</string>
+    <string name="error_email">invalid email</string>
 
 </resources>

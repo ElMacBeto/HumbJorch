@@ -92,4 +92,7 @@ dependencies {
 
     //cirlce imageview
     implementation ("de.hdodenhof:circleimageview:3.1.0")
+
+    //Biometric
+    implementation("androidx.biometric:biometric:1.2.0-alpha05")
 }
