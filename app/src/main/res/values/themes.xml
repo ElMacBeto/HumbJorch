@@ -13,4 +13,22 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="ShapeAppearanceOverlay.MyApp.TextInputLayout.Rounded" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">8dp</item>
+    </style>
+
+    <style name="MyLayoutInputTextOutline" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="hintTextColor">@color/blue</item>
+        <item name="boxStrokeColor">@color/selector_input_text_color</item>
+        <item name="boxStrokeWidthFocused">3sp</item>
+        <item name="android:textColorHint">@color/black</item>
+        <item name="strokeColor">@color/black</item>
+        <item name="android:layout_marginHorizontal" tools:targetApi="o">10sp</item>
+        <item name="android:layout_marginVertical" tools:targetApi="o">5sp</item>
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.MyApp.TextInputLayout.Rounded</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
 </resources>

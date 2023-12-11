@@ -3,4 +3,17 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="label_photo">- Photo -</string>
+    <string name="label_user_name">User name</string>
+    <string name="label_register">Register</string>
+    <string name="label_fingerprint_login">login with Touch ID</string>
+    <string name="label_password">Password</string>
+    <string name="label_email">Email</string>
+    <string name="todo">TODO</string>
+    <string name="label_login_with_touch_id">Login with Touch ID</string>
+    <string name="tv_login_touch_id_description">Use your Touch ID for faster, easier access \nto your account</string>
+    <string name="label_use_touch_id">Use Touch ID</string>
+    <string name="label_login_with_email"><u>Login with Email</u></string>
 </resources>
