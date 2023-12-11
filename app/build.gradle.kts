@@ -90,4 +90,6 @@ dependencies {
     implementation ("com.google.firebase:firebase-firestore-ktx")
     implementation ("com.google.firebase:firebase-storage-ktx")
 
+    //cirlce imageview
+    implementation ("de.hdodenhof:circleimageview:3.1.0")
 }

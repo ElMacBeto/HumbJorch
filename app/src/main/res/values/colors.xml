@@ -44,4 +44,9 @@
     <color name="toast_error">#E91E63</color>
     <color name="toast_information">#2196F3</color>
     <color name="toast_waerning">#FFC107</color>
+
+    <color name="blue">#0080B3</color>
+    <color name="gray10">#919191</color>
+
+
 </resources>
