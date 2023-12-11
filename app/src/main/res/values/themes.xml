@@ -1,16 +1,36 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.HumbJorch" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/white</item>
+    <style name="Theme.HumbJorch" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryVariant">@color/colorPrimaryVariant</item>
+        <item name="colorOnPrimary">@color/colorOnPrimary</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_700</item>
-        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorSecondary">@color/colorSecondary</item>
+        <item name="colorSecondaryVariant">@color/colorSecondaryVariant</item>
+        <item name="colorOnSecondary">@color/colorOnSecondary</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
+        <item name="android:statusBarColor">?attr/colorPrimary</item>
     </style>
+
+    <style name="Button.GradientBorderRounded" parent="Widget.MaterialComponents.Button">
+        <item name="android:background">@drawable/selector_button</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/selector_txt_button</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:paddingBottom">0dp</item>
+        <item name="android:paddingTop">0dp</item>
+        <item name="backgroundTint">@null</item>
+    </style>
+
+    <style name="Button.General" parent="Widget.MaterialComponents.Button">
+    <item name="android:fontFamily">@font/roboto_medium</item>
+    <item name="android:textSize">@dimen/size18sp</item>
+    <item name="android:background">@drawable/selector_btn_primary_general</item>
+    <item name="android:textColor">@color/selector_txt_btn_primary_ligth</item>
+    <item name="android:textAllCaps">false</item>
+    <item name="backgroundTint">@null</item>
+    </style>
+
+    <dimen name="size18sp">18sp</dimen>
 </resources>
