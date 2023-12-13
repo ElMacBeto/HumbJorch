@@ -31,9 +31,13 @@
     <string name="label_information">Information</string>
     <string name="label_warning">Warning</string>
     <string name="welcome_message">Welcome! Your security is our priority. Enjoy your session!</string>
-
-    <string name="unknow_exepcion1">Error 1</string>
-    <string name="unknow_exepcion2">Error 2</string>
-    <string name="unknow_exepcion">Error desconocido</string>
+    <string name="share_preferences_email">AUTHENTICATION_PREFERENCES_EMAIL</string>
+    <string name="share_preferences_photo_url">AUTHENTICATION_PREFERENCES_PHOTO_URL</string>
+    <string name="share_preferences_session">SHARE_PREFERENCES_SESSION</string>
+    <string name="share_preferences_touch_id_session">AUTHENTICATION_PREFERENCES_TOUCH_ID_SESSION</string>
+    <string name="share_preferences_google_session">AUTHENTICATION_PREFERENCES_GOOGLE_SESSION</string>
+    <string name="label_login_with_google">Login with Google</string>
+    <string name="tv_google_description">Welcome! Sign in with Google for a personalized and secure experience on our mobile app.</string>
+    <string name="label_google_session">Continue</string>
 
 </resources>
