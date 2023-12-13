@@ -68,7 +68,6 @@ class LoginFirstTimeFragment : Fragment() {
 
         setWatchers()
         setOnFocus()
-        viewModel.getFacts()
     }
 
     private fun setListenerActions() {
