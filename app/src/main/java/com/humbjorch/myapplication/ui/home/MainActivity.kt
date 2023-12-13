@@ -1,34 +1,43 @@
 package com.humbjorch.myapplication.ui.home
 
 import android.os.Bundle
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
+import androidx.navigation.fragment.NavHostFragment
 import com.humbjorch.myapplication.R
-import com.humbjorch.myapplication.databinding.ActivityMainBinding
+import com.humbjorch.myapplication.sis.utils.alerts.LoaderNBEXWidget
 
-class MainActivity : AppCompatActivity() {
-
-    private lateinit var binding: ActivityMainBinding
-
+class MainActivity : AppCompatActivity(){
+    private val loader by lazy { LoaderNBEXWidget() }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        supportFragmentManager.findFragmentById(R.id.fragmentContainer) as NavHostFragment
+    }
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+    fun showLoader() {
+        try {
+            val loaderDialog = supportFragmentManager.findFragmentByTag("Loader")
+            val isShowing = loader.dialog?.isShowing ?: false
+            if (loaderDialog != null && loaderDialog.isAdded) {
+                return
+            }
 
+            if (!loader.isAdded && !loader.isVisible && !isShowing) {
+                loader.show(supportFragmentManager, "Loader")
+                supportFragmentManager.executePendingTransactions()
+            }
+        } catch (e: Exception) {
+            //ERROR
+        }
+    }
 
-
-        val navController = findNavController(R.id.nav_host_fragment_activity_main)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications
-            )
-        )
+    fun dismissLoader() {
+        if (loader.isAdded) {
+            if (loader.isResumed) {
+                loader.dismiss()
+            } else {
+                loader.dismissAllowingStateLoss()
+            }
+        }
     }
 }

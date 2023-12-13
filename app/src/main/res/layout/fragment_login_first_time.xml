@@ -24,16 +24,11 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilEmail"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            style="@style/MyLayoutInputTextOutline"
             android:layout_width="@dimen/dp0"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp16"
             android:layout_marginTop="@dimen/dp24"
-            android:layout_marginEnd="@dimen/dp16"
-            app:boxStrokeColor="@color/colorBlue11"
-            app:boxStrokeWidthFocused="@dimen/dp1"
             app:endIconMode="clear_text"
-            app:errorIconDrawable="@drawable/ic_error"
             app:helperText="@string/email_label"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -44,24 +39,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:inputType="textEmailAddress"
                 android:textColor="@color/colorGray1"
                 android:textSize="@dimen/sp16"
+                android:inputType="textEmailAddress"
                 app:fontFamily="@font/roboto_medium" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilPass"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            style="@style/MyLayoutInputTextOutline"
             android:layout_width="@dimen/dp0"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp16"
             android:layout_marginTop="@dimen/dp35"
-            android:layout_marginEnd="@dimen/dp16"
-            app:boxStrokeColor="@color/colorBlue11"
-            app:boxStrokeWidthFocused="@dimen/dp1"
             app:endIconMode="password_toggle"
-            app:errorIconDrawable="@drawable/ic_error"
             app:helperText="@string/pass_label"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -138,7 +128,7 @@
             android:clickable="true"
             android:focusable="true"
             android:foreground="@drawable/foreground_grey"
-            app:cardElevation="@dimen/dp16"
+            app:cardElevation="@dimen/dp8"
             app:cardCornerRadius="@dimen/dp8"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -169,7 +159,6 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/cvGoogleLogin"
                     app:layout_constraintTop_toTopOf="@id/cvGoogleLogin" />
-
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>

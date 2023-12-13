@@ -25,5 +25,15 @@
     <string name="label_login_with_email"><u>Login with Email</u></string>
     <string name="error_name">invalid name</string>
     <string name="error_email">invalid email</string>
+    <string name="default_web_client_id">1096028603631-uvsj03mn7v1uc8si078h8u0fag6v94gs.apps.googleusercontent.com</string>
+    <string name="label_success">Success</string>
+    <string name="label_error">Error</string>
+    <string name="label_information">Information</string>
+    <string name="label_warning">Warning</string>
+    <string name="welcome_message">Welcome! Your security is our priority. Enjoy your session!</string>
+
+    <string name="unknow_exepcion1">Error 1</string>
+    <string name="unknow_exepcion2">Error 2</string>
+    <string name="unknow_exepcion">Error desconocido</string>
 
 </resources>
