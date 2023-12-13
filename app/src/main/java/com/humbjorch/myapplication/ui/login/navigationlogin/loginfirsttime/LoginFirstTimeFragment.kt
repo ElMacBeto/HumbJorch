@@ -12,10 +12,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import android.widget.Toast
 import androidx.core.widget.doAfterTextChanged
-import androidx.fragment.app.viewModels
 import com.humbjorch.myapplication.R
 import com.humbjorch.myapplication.data.datSource.ResponseStatus
-import com.humbjorch.myapplication.data.local.AuthenticationResponse
 import com.humbjorch.myapplication.databinding.FragmentLoginFirstTimeBinding
 import com.humbjorch.myapplication.sis.utils.alerts.CustomToastWidget
 import com.humbjorch.myapplication.sis.utils.alerts.TypeToast.ERROR
@@ -23,8 +21,6 @@ import com.humbjorch.myapplication.sis.utils.alerts.TypeToast.SUCCESS
 import com.humbjorch.myapplication.ui.home.MainActivity
 import com.humbjorch.myapplication.ui.login.LoginActivity
 import dagger.hilt.android.AndroidEntryPoint
-import com.humbjorch.myapplication.databinding.FragmentLoginFirstTimeBinding
-import com.humbjorch.myapplication.databinding.FragmentRegisterBinding
 import com.humbjorch.myapplication.sis.utils.BiometricsUtils
 import com.humbjorch.myapplication.sis.utils.HelperValidations
 
@@ -56,7 +52,7 @@ class LoginFirstTimeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         observerLiveData()
         setListenerActions()
-        setListeners()
+
         setWatchers()
         setOnFocus()
     }
