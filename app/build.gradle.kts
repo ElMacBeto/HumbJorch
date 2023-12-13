@@ -93,10 +93,18 @@ dependencies {
     implementation ("com.google.firebase:firebase-storage-ktx")
     implementation("com.google.firebase:firebase-auth")
 
-
     //cirlce imageview
     implementation ("de.hdodenhof:circleimageview:3.1.0")
 
     //Biometric
     implementation("androidx.biometric:biometric:1.2.0-alpha05")
+
+    //retrofit
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation ("com.squareup.okhttp3:logging-interceptor:4.9.3")
+    implementation("com.squareup.okhttp3:okhttp:4.10.0")
+
+    //glade
+    implementation("com.github.bumptech.glide:glide:4.16.0")
 }

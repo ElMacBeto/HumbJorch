@@ -8,7 +8,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.humbjorch.myapplication.data.datSource.ResponseStatus
 import com.humbjorch.myapplication.data.local.AuthenticationResponse
-import com.humbjorch.myapplication.data.model.UserModel
 import com.humbjorch.myapplication.domain.NewAuthenticationRepository
 import com.humbjorch.myapplication.sis.utils.util.Constants.StatusRequest.*
 import dagger.hilt.android.lifecycle.HiltViewModel
