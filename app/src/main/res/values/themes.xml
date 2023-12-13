@@ -33,6 +33,7 @@
     </style>
 
     <dimen name="size18sp">18sp</dimen>
+    <dimen name="dp20">20dp</dimen>
 
 
     <style name="MyLayoutInputTextOutline" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
@@ -42,6 +43,8 @@
         <item name="endIconMode">clear_text</item>
         <item name="errorIconDrawable">@drawable/ic_error</item>
         <item name="android:textColorHint">@color/black</item>
+        <item name="android:layout_marginStart">@dimen/dp20</item>
+        <item name="android:layout_marginEnd">@dimen/dp20</item>
     </style>
 
 
