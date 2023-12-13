@@ -1,28 +1,33 @@
 package com.humbjorch.myapplication.ui.login.navigationlogin.loginfirsttime
 
 
+import android.R.attr.fragment
 import android.app.Activity.RESULT_OK
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import android.widget.Toast
-import androidx.core.widget.doAfterTextChanged
 import com.humbjorch.myapplication.R
 import com.humbjorch.myapplication.data.datSource.ResponseStatus
 import com.humbjorch.myapplication.databinding.FragmentLoginFirstTimeBinding
+import com.humbjorch.myapplication.sis.utils.BiometricsUtils
+import com.humbjorch.myapplication.sis.utils.HelperValidations
 import com.humbjorch.myapplication.sis.utils.alerts.CustomToastWidget
 import com.humbjorch.myapplication.sis.utils.alerts.TypeToast.ERROR
 import com.humbjorch.myapplication.sis.utils.alerts.TypeToast.SUCCESS
 import com.humbjorch.myapplication.ui.home.MainActivity
 import com.humbjorch.myapplication.ui.login.LoginActivity
 import dagger.hilt.android.AndroidEntryPoint
-import com.humbjorch.myapplication.sis.utils.BiometricsUtils
-import com.humbjorch.myapplication.sis.utils.HelperValidations
+
 
 @AndroidEntryPoint
 class LoginFirstTimeFragment : Fragment() {
@@ -31,6 +36,7 @@ class LoginFirstTimeFragment : Fragment() {
     //validations flags
     private var emailFlag = false
     private var passwordFlag = false
+
 
     private val responseLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
@@ -48,8 +54,15 @@ class LoginFirstTimeFragment : Fragment() {
         return binding.root
     }
 
+    private val onBackPressed = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, onBackPressed)
         observerLiveData()
         setListenerActions()
 
@@ -62,14 +75,16 @@ class LoginFirstTimeFragment : Fragment() {
         binding.btnRegister.setOnClickListener {
             viewModel.createNewRegister(
                 binding.etEmail.text.toString(),
-                binding.etPass.text.toString()
+                binding.etPass.text.toString(),
+                binding.swFingerprint.isChecked
             )
         }
 
         binding.btnLogin.setOnClickListener {
             viewModel.loginAccount(
                 binding.etEmail.text.toString(),
-                binding.etPass.text.toString()
+                binding.etPass.text.toString(),
+                binding.swFingerprint.isChecked
             )
         }
 

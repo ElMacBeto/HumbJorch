@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/login_navigation"
-    app:startDestination="@id/loginFirstTimeFragment">
+    app:startDestination="@id/splashLoginFragment">
 
     <fragment
         android:id="@+id/loginFirstTimeFragment"
@@ -23,5 +23,28 @@
         android:name="com.humbjorch.myapplication.ui.login.navigationlogin.loginPassword.LoginPasswordFragment"
         android:label="fragment_login_password"
         tools:layout="@layout/fragment_login_password" />
+    <fragment
+        android:id="@+id/splashLoginFragment"
+        android:name="com.humbjorch.myapplication.ui.login.navigationlogin.splash.SplashLoginFragment"
+        android:label="fragment_splash_login"
+        tools:layout="@layout/fragment_splash_login" >
+        <action
+            android:id="@+id/action_splashLoginFragment_to_loginFirstTimeFragment"
+            app:destination="@id/loginFirstTimeFragment"/>
+        <action
+            android:id="@+id/action_splashLoginFragment_to_loginTouchIdFragment"
+            app:destination="@id/loginTouchIdFragment"/>
+        <action
+            android:id="@+id/action_splashLoginFragment_to_loginPasswordFragment"
+            app:destination="@id/loginPasswordFragment"/>
+        <action
+            android:id="@+id/action_splashLoginFragment_to_googleSesionFragment"
+            app:destination="@id/googleSesionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/googleSesionFragment"
+        android:name="com.humbjorch.myapplication.ui.login.navigationlogin.googleSession.GoogleSessionFragment"
+        android:label="fragment_google_sesion"
+        tools:layout="@layout/fragment_google_sesion" />
 
 </navigation>
