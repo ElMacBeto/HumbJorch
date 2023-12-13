@@ -123,7 +123,6 @@ class LoginFirstTimeFragment : Fragment() {
             binding.tilEmail.isErrorEnabled = false
             binding.tilEmail.error = null
             emailFlag = HelperValidations.isValidEmail(email)
-            viewModel.userData.name = email
             activeButton()
         }
         binding.tilPass.editText!!.doAfterTextChanged { inputText ->
@@ -131,7 +130,6 @@ class LoginFirstTimeFragment : Fragment() {
             binding.tilPass.isErrorEnabled = false
             binding.tilPass.error = null
             passwordFlag = HelperValidations.isValidPassword(password)
-            viewModel.userData.email = password
             activeButton()
         }
     }
@@ -153,6 +151,7 @@ class LoginFirstTimeFragment : Fragment() {
     private fun activeButton() {
         val isEnable = emailFlag && passwordFlag
         binding.btnRegister.isEnabled = isEnable
+        binding.btnLogin.isEnabled = isEnable
         binding.swFingerprint.isEnabled = isEnable
     }
 

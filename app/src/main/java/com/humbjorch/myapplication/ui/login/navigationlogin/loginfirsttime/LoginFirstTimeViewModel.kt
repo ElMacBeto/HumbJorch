@@ -24,12 +24,6 @@ class LoginFirstTimeViewModel @Inject constructor(private val authenticationRepo
 
     fun getClientProvide() = authenticationRepository.getClientProvide()
 
-    var userData: UserModel = UserModel()
-
-    fun registerNewUser() {
-        //TODO
-    }
-
     fun createNewRegister(
         user: String,
         password: String

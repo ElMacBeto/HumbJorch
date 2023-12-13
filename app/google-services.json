@@ -22,6 +22,14 @@
           }
         },
         {
+          "client_id": "1096028603631-lqtprkgtg73i7cttemdbmrc3ar5q1trg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.humbjorch.myapplication",
+            "certificate_hash": "325d135e6dbc75357c31db447f4f7dbcf9b34490"
+          }
+        },
+        {
           "client_id": "1096028603631-qfp6067uk4kobupcsvllumejpgbi1ro7.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
