@@ -1,9 +1,9 @@
-package com.humbjorch.myapplication.ui.register
+package com.humbjorch.myapplication.ui.login.navigationlogin.loginfirsttime
 
 import androidx.lifecycle.ViewModel
 import com.humbjorch.myapplication.data.model.UserModel
 
-class RegisterViewModel : ViewModel() {
+class LoginFirstTimeViewModel: ViewModel() {
 
 
     var userData: UserModel = UserModel()
@@ -11,5 +11,4 @@ class RegisterViewModel : ViewModel() {
     fun registerNewUser() {
         //TODO
     }
-
 }
