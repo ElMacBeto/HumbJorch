@@ -39,5 +39,8 @@
     <string name="label_login_with_google">Login with Google</string>
     <string name="tv_google_description">Welcome! Sign in with Google for a personalized and secure experience on our mobile app.</string>
     <string name="label_google_session">Continue</string>
+    <string name="label_show_all_post">Show All Post</string>
+    <string name="label_favorites">Favorites</string>
+    <string name="label_show_all">Show All</string>
 
 </resources>

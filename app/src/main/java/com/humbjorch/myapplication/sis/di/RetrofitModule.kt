@@ -1,6 +1,7 @@
 package com.humbjorch.myapplication.sis.di
 
 import com.humbjorch.myapplication.data.datSource.api.remote.WebService
+import com.humbjorch.myapplication.sis.utils.util.Constants.BASE_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,8 +16,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object RetrofitModule {
-
-        private const val baseUrl = "https://api.datos.gob.mx/"
 
         @Provides
         @Singleton
@@ -41,7 +40,7 @@ object RetrofitModule {
         @Singleton
         fun provideRetrofit(httpClient: OkHttpClient): Retrofit {
             return Retrofit.Builder()
-                .baseUrl(baseUrl)
+                .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(httpClient)
                 .build()

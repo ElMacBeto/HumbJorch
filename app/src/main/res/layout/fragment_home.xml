@@ -10,7 +10,124 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.home.dashBoard.HomeFragment">
+        tools:context=".ui.home.dashBoard.HomeFragment"
+        android:paddingHorizontal="@dimen/dp16"
+        android:paddingTop="@dimen/dp16">
+
+        <ImageView
+            android:id="@+id/btn_exit"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:contentDescription="@string/todo"
+            android:src="@drawable/ic_exit"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_logo"
+            android:layout_width="@dimen/dp80"
+            android:layout_height="@dimen/dp80"
+            android:src="@drawable/ic_logo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/img_profile"
+            android:layout_width="@dimen/dp120"
+            android:layout_height="@dimen/dp120"
+            app:cardCornerRadius="100dp"
+            app:cardElevation="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/img_logo">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imgPhotoProfile"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="4dp"
+                android:contentDescription="@string/todo"
+                android:src="@drawable/ic_add_photo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/img_logo"
+                app:tint="@color/blue" />
+
+        </androidx.cardview.widget.CardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/btn_all_post"
+            android:layout_width="232dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="36dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="@drawable/foreground_grey"
+            android:minHeight="48dp"
+            app:cardBackgroundColor="@color/blue1"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/img_profile">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingVertical="@dimen/dp10"
+                android:text="@string/label_show_all_post"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp1"
+            app:layout_constraintTop_toBottomOf="@+id/btn_all_post"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginHorizontal="@dimen/dp24"
+            android:layout_marginTop="@dimen/dp20"
+            android:background="@color/colorGray4"/>
+
+        <TextView
+            android:id="@+id/tv_favorites"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_favorites"
+            android:textColor="@color/blue2"
+            android:textStyle="bold"
+            android:textSize="@dimen/sp14"
+            android:layout_marginTop="@dimen/dp20"
+            android:layout_marginStart="@dimen/dp35"
+            app:layout_constraintTop_toBottomOf="@+id/divider"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_show_all"
+            android:textSize="@dimen/sp14"
+            android:textColor="@color/blue1"
+            android:layout_marginEnd="@dimen/dp35"
+            app:layout_constraintTop_toTopOf="@+id/tv_favorites"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_favorites"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            tools:listitem="@layout/item_fact"
+            app:layout_constraintTop_toBottomOf="@+id/tv_favorites"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="@dimen/dp16"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
