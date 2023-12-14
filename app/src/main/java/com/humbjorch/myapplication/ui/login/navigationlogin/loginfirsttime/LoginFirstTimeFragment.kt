@@ -23,6 +23,7 @@ import com.humbjorch.myapplication.sis.utils.BiometricsUtils
 import com.humbjorch.myapplication.sis.utils.HelperValidations
 import com.humbjorch.myapplication.sis.utils.alerts.CustomToastWidget
 import com.humbjorch.myapplication.sis.utils.alerts.TypeToast.ERROR
+import com.humbjorch.myapplication.sis.utils.alerts.TypeToast.INFORMATION
 import com.humbjorch.myapplication.sis.utils.alerts.TypeToast.SUCCESS
 import com.humbjorch.myapplication.ui.home.MainActivity
 import com.humbjorch.myapplication.ui.login.LoginActivity
@@ -33,6 +34,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class LoginFirstTimeFragment : Fragment() {
     private lateinit var binding: FragmentLoginFirstTimeBinding
     private val viewModel: LoginFirstTimeViewModel by viewModels()
+
     //validations flags
     private var emailFlag = false
     private var passwordFlag = false
@@ -65,9 +67,9 @@ class LoginFirstTimeFragment : Fragment() {
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, onBackPressed)
         observerLiveData()
         setListenerActions()
-
         setWatchers()
         setOnFocus()
+        (activity as LoginActivity).dismissLoader()
     }
 
     private fun setListenerActions() {
@@ -173,8 +175,15 @@ class LoginFirstTimeFragment : Fragment() {
     private fun showFingerPrint() {
         BiometricsUtils.showBiometricPrompt(this) {
             if (it) {
-                Toast.makeText(requireContext(), "autorizado", Toast.LENGTH_SHORT).show()
+                CustomToastWidget.show(
+                    requireActivity(),
+                    getString(R.string.touch_success), INFORMATION
+                )
             } else {
+                CustomToastWidget.show(
+                    requireActivity(),
+                    getString(R.string.touch_error), ERROR
+                )
                 binding.swFingerprint.isChecked = false
             }
         }

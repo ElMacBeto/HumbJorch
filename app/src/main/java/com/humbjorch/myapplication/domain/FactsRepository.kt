@@ -2,12 +2,14 @@ package com.humbjorch.myapplication.domain
 
 import com.humbjorch.myapplication.data.datSource.ResponseStatus
 import com.humbjorch.myapplication.data.datSource.api.remote.WebService
+import com.humbjorch.myapplication.data.datSource.db.FactsDAO
+import com.humbjorch.myapplication.data.datSource.localDS.LocalDS
 import com.humbjorch.myapplication.data.datSource.makeFirebaseCall
+import com.humbjorch.myapplication.data.model.FactsEntity
 import com.humbjorch.myapplication.data.model.FactsModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
-import okhttp3.internal.wait
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -21,28 +23,26 @@ class FactsRepository @Inject constructor(
 ) : ConnectionWebService {
 
     override suspend fun getFacts(): ResponseStatus<ArrayList<FactsModel>> {
-        return withContext(Dispatchers.IO){
+        return withContext(Dispatchers.IO) {
             val request = async { getAllFacts() }
             val response = request.await()
-            if (response is ResponseStatus.Success){
+            if (response is ResponseStatus.Success) {
                 ResponseStatus.Success(response.data)
-            }else{
+            } else {
                 ResponseStatus.Error((response as ResponseStatus.Error).messageId)
             }
         }
     }
 
-    private suspend fun getAllFacts():ResponseStatus<ArrayList<FactsModel>> = makeFirebaseCall {
-            val response = getAllFactsResponse()
-            response
-        }
+    private suspend fun getAllFacts(): ResponseStatus<ArrayList<FactsModel>> = makeFirebaseCall {
+        val response = getAllFactsResponse()
+        response
+    }
 
     private suspend fun getAllFactsResponse(): ArrayList<FactsModel> {
-       return apiService.getFacts().let {
+        return apiService.getFacts().let {
             val data = it.body()!!
             data.results
         }
     }
-
-
 }

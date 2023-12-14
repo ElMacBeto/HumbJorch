@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.humbjorch.myapplication.R
+import com.humbjorch.myapplication.data.datSource.ResponseStatus
+import com.humbjorch.myapplication.data.model.FactsModel
 import com.humbjorch.myapplication.databinding.FragmentSplashLoginBinding
 import com.humbjorch.myapplication.sis.utils.util.Constants
 import com.humbjorch.myapplication.ui.login.LoginActivity
@@ -30,7 +32,6 @@ class SplashLoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.getFacts()
-        //viewModel.setDestinationLogin()
         observerLiveData()
     }
 
@@ -56,6 +57,24 @@ class SplashLoginFragment : Fragment() {
                 Constants.ListenerLoginDestination.DestinationGoogleSession -> {
                     binding.root.findNavController()
                         .navigate(R.id.action_splashLoginFragment_to_googleSesionFragment)
+                }
+            }
+        }
+
+        viewModel.getAllFactsLiveData.observe(viewLifecycleOwner) {
+            when (it) {
+                is ResponseStatus.Loading -> {
+                    (activity as LoginActivity).showLoader()
+                }
+
+                is ResponseStatus.Success -> {
+                    viewModel.createEntityInsert(it.data as ArrayList<FactsModel>)
+                    viewModel.setDestinationLogin()
+                }
+
+                is ResponseStatus.Error -> {
+                    (activity as LoginActivity).dismissLoader()
+                    // TODO: agregar una alerta
                 }
             }
         }
