@@ -29,8 +29,7 @@ class SplashLoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.getFacts()
-        //viewModel.setDestinationLogin()
+        viewModel.setDestinationLogin()
         observerLiveData()
     }
 

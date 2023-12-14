@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="fatc"
+            type="com.humbjorch.myapplication.data.model.FactsModel" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -21,7 +23,7 @@
                 android:id="@+id/tv_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="11 Nov"
+                android:text="11 Nov"
                 android:textSize="@dimen/sp16"
                 android:textColor="@color/black"
                 android:textStyle="bold"
@@ -45,6 +47,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="INMUJERES"
+                android:text="@{fatc.slug}"
                 android:textAllCaps="true"
                 android:textSize="@dimen/sp12"
                 android:textColor="@color/black"
@@ -59,10 +62,12 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 tools:text="15 es el numero de bases de datos que la dependencia CDI ha publicado"
+                android:text="@{fatc.fact}"
                 app:layout_constraintTop_toBottomOf="@+id/tv_fact"
                 app:layout_constraintStart_toStartOf="@+id/tv_fact"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/img_detail"/>
+
             <ImageView
                 android:id="@+id/img_detail"
                 android:layout_width="@dimen/dp24"
@@ -72,8 +77,6 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
-
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
