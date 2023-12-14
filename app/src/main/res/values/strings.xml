@@ -42,5 +42,7 @@
     <string name="label_show_all_post">Show All Post</string>
     <string name="label_favorites">Favorites</string>
     <string name="label_show_all">Show All</string>
+    <string name="touch_success">Success: Fingerprint verified. Access granted.</string>
+    <string name="touch_error">Error: Fingerprint not recognized. Access denied.</string>
 
 </resources>

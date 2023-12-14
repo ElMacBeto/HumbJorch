@@ -6,18 +6,25 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.humbjorch.myapplication.data.datSource.ResponseStatus
+import com.humbjorch.myapplication.data.datSource.db.FactsDAO
+import com.humbjorch.myapplication.data.datSource.localDS.LocalDS
+import com.humbjorch.myapplication.data.model.FactsEntity
 import com.humbjorch.myapplication.data.model.FactsModel
 import com.humbjorch.myapplication.domain.FactsRepository
 import com.humbjorch.myapplication.sis.di.ModuleSharePreference
 import com.humbjorch.myapplication.sis.utils.util.Constants
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
 class SplashViewModel @Inject constructor(
     private val moduleSharePreference: ModuleSharePreference,
-    private val factsRepository: FactsRepository
+    private val factsRepository: FactsRepository,
+    private val localDS: LocalDS
 ) :
     ViewModel() {
 
@@ -50,10 +57,16 @@ class SplashViewModel @Inject constructor(
         }
     }
 
-    fun getFacts(){
+    fun getFacts() {
+        _getAllFactsLiveData.value = ResponseStatus.Loading()
         viewModelScope.launch {
-            _getAllFactsLiveData.value = ResponseStatus.Loading()
-            handelServiceResponseStatus(factsRepository.getFacts())
+            if (localDS.getCount() > 0) {
+                CoroutineScope(Dispatchers.Main).launch {
+                    setDestinationLogin()
+                }
+            } else {
+                handelServiceResponseStatus(factsRepository.getFacts())
+            }
         }
     }
 
@@ -61,6 +74,31 @@ class SplashViewModel @Inject constructor(
     @SuppressLint("NullSafeMutableLiveData")
     private fun handelServiceResponseStatus(apiResponseStatus: ResponseStatus<ArrayList<FactsModel>>) {
         _getAllFactsLiveData.value = apiResponseStatus as ResponseStatus<Any>
+    }
+
+    fun createEntityInsert(data: ArrayList<FactsModel>) {
+        viewModelScope.launch{
+            data.forEach { factsModel ->
+                localDS.insertEntity(setData(factsModel))
+            }
+        }
+    }
+
+    private fun setData(factsModel: FactsModel): FactsEntity {
+        return FactsEntity(
+            id = 0,
+            id_api = factsModel.id,
+            columns = factsModel.columns,
+            createdAt = factsModel.createdAt,
+            dataset = factsModel.dataset,
+            fact = factsModel.fact,
+            dateInsert = factsModel.dateInsert,
+            operations = factsModel.operations,
+            organization = factsModel.organization,
+            resource = factsModel.resource,
+            slug = factsModel.slug,
+            url = factsModel.url
+        )
     }
 
 }
