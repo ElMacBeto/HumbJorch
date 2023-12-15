@@ -20,10 +20,6 @@ class LoginSessionViewModel @Inject constructor(
     private val authenticationRepository: NewAuthenticationRepository
 ) :
     ViewModel() {
-
-
-    private var _createRegister = MutableLiveData<ResponseStatus<Any>>()
-    val createRegister: LiveData<ResponseStatus<Any>> get() = _createRegister
     private fun getEmail() = moduleSharePreference.getEmail()
     fun getImageUrl() = moduleSharePreference.getPhoto()
     fun getTouchId() = moduleSharePreference.getTouchId()
@@ -44,6 +40,33 @@ class LoginSessionViewModel @Inject constructor(
         }
     }
 
+    private var _createRegister = MutableLiveData<ResponseStatus<Any>>()
+    val createRegister: LiveData<ResponseStatus<Any>> get() = _createRegister
+
+    fun getClientProvide() = authenticationRepository.getClientProvide()
+
+    fun createNewRegister(
+        user: String,
+        password: String,
+        touchId:Boolean
+    ) {
+        viewModelScope.launch {
+            _createRegister.value = ResponseStatus.Loading()
+            handelFirebaseResponseStatus(authenticationRepository.createNewRegister(user, password, touchId))
+        }
+    }
+
+    fun loginAccount(
+        user: String,
+        password: String,
+        touchId:Boolean
+    ) {
+        viewModelScope.launch {
+            _createRegister.value = ResponseStatus.Loading()
+            handelFirebaseResponseStatus( authenticationRepository.loginUser(user, password, touchId))
+        }
+    }
+
     fun launchGoogle(
         data: Intent
     ) {
@@ -52,8 +75,6 @@ class LoginSessionViewModel @Inject constructor(
             handelFirebaseResponseStatus(authenticationRepository.singInWithGoogle(data))
         }
     }
-
-    fun getClientProvide() = authenticationRepository.getClientProvide()
 
     /***
      * HANDLE
@@ -64,4 +85,5 @@ class LoginSessionViewModel @Inject constructor(
     private fun handelFirebaseResponseStatus(apiResponseStatus: ResponseStatus<AuthenticationResponse>) {
         _createRegister.value = apiResponseStatus as ResponseStatus<Any>
     }
+
 }

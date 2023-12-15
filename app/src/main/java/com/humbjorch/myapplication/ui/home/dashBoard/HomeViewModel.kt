@@ -7,11 +7,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.humbjorch.myapplication.data.datSource.ResponseStatus
 import com.humbjorch.myapplication.data.model.FactsModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class HomeViewModel : ViewModel() {
-
-
+@HiltViewModel
+class HomeViewModel @Inject constructor() : ViewModel() {
     private var _getAllFactsLiveData = MutableLiveData<ResponseStatus<Any>>()
     val getAllFactsLiveData: LiveData<ResponseStatus<Any>> get() = _getAllFactsLiveData
 

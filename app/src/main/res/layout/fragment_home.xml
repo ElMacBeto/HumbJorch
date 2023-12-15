@@ -10,35 +10,20 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/ic_back"
         tools:context=".ui.home.dashBoard.HomeFragment">
 
-        <ImageView
-            android:id="@+id/btn_exit"
-            android:layout_width="42dp"
-            android:layout_height="42dp"
-            android:contentDescription="@string/todo"
-            android:src="@drawable/ic_exit"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/img_logo"
-            android:layout_width="@dimen/dp80"
-            android:layout_height="@dimen/dp80"
-            android:src="@drawable/ic_logo"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/img_profile"
             android:layout_width="@dimen/dp120"
             android:layout_height="@dimen/dp120"
+            android:layout_marginTop="@dimen/dp80"
             app:cardCornerRadius="100dp"
             app:cardElevation="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/img_logo">
+            app:layout_constraintTop_toTopOf="parent">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/imgPhotoProfile"
@@ -48,96 +33,114 @@
                 android:contentDescription="@string/todo"
                 android:src="@drawable/ic_add_photo"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/img_logo"
-                app:tint="@color/blue" />
+                app:layout_constraintStart_toStartOf="parent" />
 
         </androidx.cardview.widget.CardView>
 
-        <com.google.android.material.card.MaterialCardView
+        <androidx.cardview.widget.CardView
             android:id="@+id/btn_all_post"
             android:layout_width="232dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="36dp"
+            android:layout_height="@dimen/dp50"
+            android:layout_marginTop="@dimen/dp20"
             android:clickable="true"
             android:focusable="true"
             android:foreground="@drawable/foreground_grey"
-            android:minHeight="48dp"
-            app:cardBackgroundColor="@color/blue1"
+            app:cardBackgroundColor="#E6C4D7F4"
             app:cardCornerRadius="8dp"
-            app:cardElevation="8dp"
+            app:cardElevation="@dimen/dp8"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/img_profile">
 
-            <TextView
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingVertical="@dimen/dp10"
-                android:text="@string/label_show_all_post"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
+                android:layout_height="match_parent">
 
-        </com.google.android.material.card.MaterialCardView>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:gravity="center"
+                    android:text="@string/label_show_all_post"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
 
         <View
             android:id="@+id/divider"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp1"
-            app:layout_constraintTop_toBottomOf="@+id/btn_all_post"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginHorizontal="@dimen/dp24"
             android:layout_marginTop="@dimen/dp20"
-            android:background="@color/colorGray4"/>
-
-        <TextView
-            android:id="@+id/tv_favorites"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/label_favorites"
-            android:textColor="@color/blue2"
-            android:textStyle="bold"
-            android:textSize="@dimen/sp14"
-            android:layout_marginTop="@dimen/dp20"
-            android:layout_marginStart="@dimen/dp35"
-            app:layout_constraintTop_toBottomOf="@+id/divider"
-            app:layout_constraintStart_toStartOf="parent"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/label_show_all"
-            android:textSize="@dimen/sp14"
-            android:textColor="@color/blue1"
-            android:layout_marginEnd="@dimen/dp35"
-            app:layout_constraintTop_toTopOf="@+id/tv_favorites"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_favorites"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            android:background="@color/colorGray4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_all_post" />
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintTop_toBottomOf="@+id/tv_favorites"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_height="@dimen/dp0"
+            android:layout_marginStart="@dimen/dp16"
+            android:layout_marginTop="@dimen/dp16"
+            android:layout_marginEnd="@dimen/dp16"
+            android:layout_marginBottom="@dimen/dp50"
+            app:cardBackgroundColor="#EDFFFFFF"
             app:cardCornerRadius="@dimen/dp8"
-            app:cardElevation="@dimen/dp16"
-            android:layout_marginBottom="@dimen/dp16"
-            android:layout_margin="@dimen/dp16">
+            app:cardElevation="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/divider">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_facts"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:listitem="@layout/item_fact"
-                />
+                android:layout_marginStart="@dimen/dp16"
+                android:layout_marginTop="@dimen/dp16"
+                android:layout_marginEnd="@dimen/dp16"
+                android:layout_marginBottom="@dimen/dp20">
 
+                <TextView
+                    android:id="@+id/tv_favorites"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_favorites"
+                    android:textColor="@color/blue2"
+                    android:textSize="@dimen/sp14"
+                    app:fontFamily="@font/roboto_medium"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_show_all"
+                    android:textColor="@color/blue2"
+                    android:textSize="@dimen/sp14"
+                    app:fontFamily="@font/roboto"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_favorites"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tv_favorites" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_facts"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_favorites"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    tools:listitem="@layout/item_fact"
+                    android:layout_marginTop="@dimen/dp16"
+                    android:paddingBottom="@dimen/dp8"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </layout>

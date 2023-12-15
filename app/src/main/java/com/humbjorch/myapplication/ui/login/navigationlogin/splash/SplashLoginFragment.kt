@@ -33,6 +33,9 @@ class SplashLoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel.getFacts()
         observerLiveData()
+        binding.btnFinishSession.setOnClickListener {
+            (activity as LoginActivity).finish()
+        }
     }
 
     private fun observerLiveData() {
@@ -73,8 +76,8 @@ class SplashLoginFragment : Fragment() {
                 }
 
                 is ResponseStatus.Error -> {
-                    binding.containerLoader.visibility = View.INVISIBLE
-                    // TODO: agregar una alerta
+                    binding.containerLoader.visibility = View.GONE
+                    binding.containerAlert.visibility = View.VISIBLE
                 }
             }
         }

@@ -20,7 +20,9 @@
     <string name="label_email">Email</string>
     <string name="todo">TODO</string>
     <string name="label_login_with_touch_id">Login with Touch ID</string>
+    <string name="label_login_with_email_password">Login with Password</string>
     <string name="tv_login_touch_id_description">Use your Touch ID for faster, easier access \nto your account</string>
+    <string name="tv_login_touch_id_description_email">Use your Password for faster, easier access \nto your account</string>
     <string name="label_use_touch_id">Use Touch ID</string>
     <string name="label_login_with_email"><u>Login with Email</u></string>
     <string name="error_name">invalid name</string>
@@ -44,5 +46,12 @@
     <string name="label_show_all">Show All</string>
     <string name="touch_success">Success: Fingerprint verified. Access granted.</string>
     <string name="touch_error">Error: Fingerprint not recognized. Access denied.</string>
+    <string name="dialog_confirm">Accept</string>
+    <string name="cancel_dialog">Cancel</string>
+    <string name="not_conection">You don\'t have access to a stable network</string>
+    <string name="dialog_error">Warning!!</string>
+    <string name="label_error_red">Initialization Error</string>
+    <string name="tv_error_description">App failed to start. Please check your connection and try again. If issue persists, reinstall the application.</string>
+    <string name="label_finish_session">Finish</string>
 
 </resources>

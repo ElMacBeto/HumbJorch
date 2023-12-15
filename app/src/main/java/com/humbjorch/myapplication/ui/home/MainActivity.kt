@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import com.humbjorch.myapplication.R
 import com.humbjorch.myapplication.sis.utils.alerts.LoaderNBEXWidget
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity(){
     private val loader by lazy { LoaderNBEXWidget() }
     override fun onCreate(savedInstanceState: Bundle?) {

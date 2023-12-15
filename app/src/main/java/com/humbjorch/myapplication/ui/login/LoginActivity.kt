@@ -10,7 +10,10 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import com.humbjorch.myapplication.R
 import com.humbjorch.myapplication.sis.utils.alerts.LoaderNBEXWidget
+import com.humbjorch.myapplication.sis.utils.launchTimer
+import com.humbjorch.myapplication.sis.utils.timer.CheckConnection
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.Timer
 
 @AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
@@ -20,6 +23,8 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         supportFragmentManager.findFragmentById(R.id.fragmentContainerHome) as NavHostFragment
+
+        this.launchTimer()
     }
 
     fun showLoader() {

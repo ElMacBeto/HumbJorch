@@ -10,116 +10,131 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/ic_back"
         tools:context=".ui.login.navigationlogin.loginfirsttime.LoginFirstTimeFragment">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/imgLogo"
-            android:layout_width="@dimen/dp120"
-            android:layout_height="@dimen/dp120"
-            android:src="@drawable/ic_logo"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tilEmail"
-            style="@style/MyLayoutInputTextOutline"
-            android:layout_width="@dimen/dp0"
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp24"
-            app:endIconMode="clear_text"
-            app:helperText="@string/email_label"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/imgLogo">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_margin="@dimen/dp16"
+            app:cardCornerRadius="@dimen/dp8"
+            app:cardElevation="4dp"
+            app:cardBackgroundColor="#EDFFFFFF">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etEmail"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center"
-                android:textColor="@color/colorGray1"
-                android:textSize="@dimen/sp16"
-                android:inputType="textEmailAddress"
-                app:fontFamily="@font/roboto_medium" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_marginStart="@dimen/dp24"
+                android:layout_marginEnd="@dimen/dp24"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="30dp">
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilEmail"
+                    style="@style/MyLayoutInputTextOutline"
+                    android:layout_width="@dimen/dp0"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp24"
+                    app:endIconMode="clear_text"
+                    app:helperText="@string/email_label"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tilPass"
-            style="@style/MyLayoutInputTextOutline"
-            android:layout_width="@dimen/dp0"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp35"
-            app:endIconMode="password_toggle"
-            app:helperText="@string/pass_label"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tilEmail">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:textColor="@color/colorGray1"
+                        android:textSize="@dimen/sp16"
+                        android:inputType="textEmailAddress"
+                        app:fontFamily="@font/roboto_medium" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etPass"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:inputType="textPassword"
-                android:textColor="@color/colorGray1"
-                android:textSize="@dimen/sp16"
-                app:fontFamily="@font/roboto_medium" />
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilPass"
+                    style="@style/MyLayoutInputTextOutline"
+                    android:layout_width="@dimen/dp0"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp35"
+                    app:endIconMode="password_toggle"
+                    app:helperText="@string/pass_label"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tilEmail">
 
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/sw_fingerprint"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:enabled="false"
-            app:layout_constraintEnd_toEndOf="@+id/tilPass"
-            app:layout_constraintTop_toBottomOf="@+id/tilPass" />
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etPass"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:inputType="textPassword"
+                        android:textColor="@color/colorGray1"
+                        android:textSize="@dimen/sp16"
+                        app:fontFamily="@font/roboto_medium" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/label_fingerprint_login"
-            app:layout_constraintBottom_toBottomOf="@id/sw_fingerprint"
-            app:layout_constraintEnd_toStartOf="@id/sw_fingerprint"
-            app:layout_constraintTop_toTopOf="@+id/sw_fingerprint" />
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/sw_fingerprint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:enabled="false"
+                    app:layout_constraintEnd_toEndOf="@+id/tilPass"
+                    app:layout_constraintTop_toBottomOf="@+id/tilPass" />
 
-        <Button
-            android:id="@+id/btnRegister"
-            style="@style/Button.GradientBorderRounded"
-            android:layout_width="@dimen/dp0"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp50"
-            android:layout_marginTop="@dimen/dp50"
-            android:layout_marginEnd="@dimen/dp8"
-            android:layout_weight="1"
-            android:text="@string/sing_in"
-            android:enabled="false"
-            app:layout_constraintEnd_toStartOf="@id/guideline2"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/sw_fingerprint" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_fingerprint_login"
+                    app:layout_constraintBottom_toBottomOf="@id/sw_fingerprint"
+                    app:layout_constraintEnd_toStartOf="@id/sw_fingerprint"
+                    app:layout_constraintTop_toTopOf="@+id/sw_fingerprint" />
 
-        <Button
-            android:id="@+id/btnLogin"
-            style="@style/Button.General"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp8"
-            android:layout_marginEnd="@dimen/dp50"
-            android:layout_weight="1"
-            android:text="@string/log_in"
-            android:enabled="false"
-            app:layout_constraintBottom_toBottomOf="@id/btnRegister"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/guideline2"
-            app:layout_constraintTop_toTopOf="@id/btnRegister" />
+                <Button
+                    android:id="@+id/btnRegister"
+                    style="@style/Button.GradientBorderRounded"
+                    android:layout_width="@dimen/dp0"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp50"
+                    android:layout_marginTop="@dimen/dp50"
+                    android:layout_marginEnd="@dimen/dp8"
+                    android:layout_weight="1"
+                    android:text="@string/sing_in"
+                    android:enabled="false"
+                    app:layout_constraintEnd_toStartOf="@id/guideline2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/sw_fingerprint" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.5" />
+                <Button
+                    android:id="@+id/btnLogin"
+                    style="@style/Button.General"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp8"
+                    android:layout_marginEnd="@dimen/dp50"
+                    android:layout_weight="1"
+                    android:text="@string/log_in"
+                    android:enabled="false"
+                    app:layout_constraintBottom_toBottomOf="@id/btnRegister"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/guideline2"
+                    app:layout_constraintTop_toTopOf="@id/btnRegister" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.5" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
 
         <androidx.cardview.widget.CardView
             android:id="@+id/containerGoogleLogin"
@@ -127,15 +142,15 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp16"
             android:layout_marginEnd="@dimen/dp16"
+            android:layout_marginBottom="@dimen/dp24"
             android:clickable="true"
             android:focusable="true"
             android:foreground="@drawable/foreground_grey"
-            app:cardElevation="@dimen/dp8"
             app:cardCornerRadius="@dimen/dp8"
+            app:cardElevation="@dimen/dp8"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginBottom="@dimen/dp24">
+            app:layout_constraintStart_toStartOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"

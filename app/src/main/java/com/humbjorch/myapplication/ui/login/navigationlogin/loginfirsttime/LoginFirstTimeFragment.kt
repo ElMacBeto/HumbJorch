@@ -1,16 +1,12 @@
 package com.humbjorch.myapplication.ui.login.navigationlogin.loginfirsttime
 
 
-import android.R.attr.fragment
 import android.app.Activity.RESULT_OK
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
-import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.widget.doAfterTextChanged
@@ -27,13 +23,14 @@ import com.humbjorch.myapplication.sis.utils.alerts.TypeToast.INFORMATION
 import com.humbjorch.myapplication.sis.utils.alerts.TypeToast.SUCCESS
 import com.humbjorch.myapplication.ui.home.MainActivity
 import com.humbjorch.myapplication.ui.login.LoginActivity
+import com.humbjorch.myapplication.ui.login.LoginSessionViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
 class LoginFirstTimeFragment : Fragment() {
     private lateinit var binding: FragmentLoginFirstTimeBinding
-    private val viewModel: LoginFirstTimeViewModel by viewModels()
+    private val viewModel: LoginSessionViewModel by viewModels()
 
     //validations flags
     private var emailFlag = false

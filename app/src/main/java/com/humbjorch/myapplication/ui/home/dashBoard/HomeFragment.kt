@@ -10,11 +10,16 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.humbjorch.myapplication.data.model.FactsModel
 import com.humbjorch.myapplication.databinding.FragmentHomeBinding
+import com.humbjorch.myapplication.sis.utils.loadImageUrl
 import com.humbjorch.myapplication.ui.home.dashBoard.adapter.FactsAdapter
+import com.humbjorch.myapplication.ui.login.LoginSessionViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
 
     private val viewModel: HomeViewModel by viewModels()
+    private val sessionViewModel: LoginSessionViewModel by viewModels()
     private lateinit var binding: FragmentHomeBinding
     private lateinit var factAdapter: FactsAdapter
     private var factList: List<FactsModel> = listOf()
@@ -31,7 +36,7 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        binding.imgPhotoProfile.loadImageUrl(sessionViewModel.getImageUrl())
         setAdapter()
         setObservers()
         viewModel.getFacts()
