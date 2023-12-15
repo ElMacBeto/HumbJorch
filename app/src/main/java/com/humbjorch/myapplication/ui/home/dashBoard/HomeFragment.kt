@@ -6,23 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.humbjorch.myapplication.data.model.FactsModel
 import com.humbjorch.myapplication.databinding.FragmentHomeBinding
 import com.humbjorch.myapplication.ui.home.dashBoard.adapter.FactsAdapter
 
 class HomeFragment : Fragment() {
 
+    private val viewModel: HomeViewModel by viewModels()
     private lateinit var binding: FragmentHomeBinding
     private lateinit var factAdapter: FactsAdapter
-    private var factList: List<FactsModel> = listOf(
-        FactsModel("1","sdf",23,"dfsdfsdfsdfggfg", "324234", "fvcbtrbvbgffbfghgff", "wervzdfadfa", "ewewerwer", "wewerwersfd", "hola mundo", "www.asdasdas.com"),
-        FactsModel("2","sdf",23,"dfsdfsdfsdfggfg", "324234", "fvcbtrbvbgffbfghgff", "wervzdfadfa", "ewewerwer", "wewerwersfd", "hola mundo", "www.asdasdas.com"),
-        FactsModel("3","sdf",23,"dfsdfsdfsdfggfg", "324234", "fvcbtrbvbgffbfghgff", "wervzdfadfa", "ewewerwer", "wewerwersfd", "hola mundo", "www.asdasdas.com"),
-        FactsModel("4","sdf",23,"dfsdfsdfsdfggfg", "324234", "fvcbtrbvbgffbfghgff", "wervzdfadfa", "ewewerwer", "wewerwersfd", "hola mundo", "www.asdasdas.com"),
-        FactsModel("5","sdf",23,"dfsdfsdfsdfggfg", "324234", "fvcbtrbvbgffbfghgff", "wervzdfadfa", "ewewerwer", "wewerwersfd", "hola mundo", "www.asdasdas.com")
-    )
+    private var factList: List<FactsModel> = listOf()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,6 +33,21 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setAdapter()
+        setObservers()
+        viewModel.getFacts()
+    }
+
+    private fun setObservers() {
+        viewModel.getAllFactsLiveData.observe(viewLifecycleOwner){
+            factList = listOf(
+                FactsModel("1","sdf",23,"dfsdfsdfsdfggfg", "324234", "fvcbtrbvbgffbfghgff", "wervzdfadfa", "ewewerwer", "wewerwersfd", "hola mundo", "www.asdasdas.com"),
+                FactsModel("2","sdf",23,"dfsdfsdfsdfggfg", "324234", "fvcbtrbvbgffbfghgff", "wervzdfadfa", "ewewerwer", "wewerwersfd", "hola mundo", "www.asdasdas.com"),
+                FactsModel("3","sdf",23,"dfsdfsdfsdfggfg", "324234", "fvcbtrbvbgffbfghgff", "wervzdfadfa", "ewewerwer", "wewerwersfd", "hola mundo", "www.asdasdas.com"),
+                FactsModel("4","sdf",23,"dfsdfsdfsdfggfg", "324234", "fvcbtrbvbgffbfghgff", "wervzdfadfa", "ewewerwer", "wewerwersfd", "hola mundo", "www.asdasdas.com"),
+                FactsModel("5","sdf",23,"dfsdfsdfsdfggfg", "324234", "fvcbtrbvbgffbfghgff", "wervzdfadfa", "ewewerwer", "wewerwersfd", "hola mundo", "www.asdasdas.com")
+            )
+            factAdapter.updateList(factList)
+        }
     }
 
     private fun setAdapter() {

@@ -64,7 +64,7 @@ class SplashLoginFragment : Fragment() {
         viewModel.getAllFactsLiveData.observe(viewLifecycleOwner) {
             when (it) {
                 is ResponseStatus.Loading -> {
-                    (activity as LoginActivity).showLoader()
+                    // TODO:
                 }
 
                 is ResponseStatus.Success -> {
@@ -73,10 +73,11 @@ class SplashLoginFragment : Fragment() {
                 }
 
                 is ResponseStatus.Error -> {
-                    (activity as LoginActivity).dismissLoader()
+                    binding.containerLoader.visibility = View.INVISIBLE
                     // TODO: agregar una alerta
                 }
             }
         }
+
     }
 }

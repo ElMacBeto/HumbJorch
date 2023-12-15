@@ -10,9 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.home.dashBoard.HomeFragment"
-        android:paddingHorizontal="@dimen/dp16"
-        android:paddingTop="@dimen/dp16">
+        tools:context=".ui.home.dashBoard.HomeFragment">
 
         <ImageView
             android:id="@+id/btn_exit"
@@ -119,16 +117,27 @@
             app:layout_constraintBottom_toBottomOf="@+id/tv_favorites"
             app:layout_constraintEnd_toEndOf="parent"/>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_facts"
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            tools:listitem="@layout/item_fact"
             app:layout_constraintTop_toBottomOf="@+id/tv_favorites"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="@dimen/dp16"/>
+            app:cardCornerRadius="@dimen/dp8"
+            app:cardElevation="@dimen/dp16"
+            android:layout_marginBottom="@dimen/dp16"
+            android:layout_margin="@dimen/dp16">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_facts"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:listitem="@layout/item_fact"
+                />
+
+        </androidx.cardview.widget.CardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>
