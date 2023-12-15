@@ -2,7 +2,6 @@ package com.humbjorch.myapplication.domain
 
 import com.humbjorch.myapplication.data.datSource.ResponseStatus
 import com.humbjorch.myapplication.data.datSource.api.remote.WebService
-import com.humbjorch.myapplication.data.datSource.db.FactsDAO
 import com.humbjorch.myapplication.data.datSource.localDS.LocalDS
 import com.humbjorch.myapplication.data.datSource.makeFirebaseCall
 import com.humbjorch.myapplication.data.model.FactsEntity

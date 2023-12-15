@@ -2,6 +2,7 @@ package com.humbjorch.myapplication.data.datSource
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import java.sql.SQLException
 
 suspend fun <T> makeFirebaseCall(
     call: suspend () -> T
@@ -11,6 +12,8 @@ suspend fun <T> makeFirebaseCall(
     } catch (e: ClassNotFoundException) {
         ResponseStatus.Error(e.message.toString())
     } catch (e: Exception) {
+        ResponseStatus.Error(e.message.toString())
+    } catch (e: SQLException) {
         ResponseStatus.Error(e.message.toString())
     }
 }

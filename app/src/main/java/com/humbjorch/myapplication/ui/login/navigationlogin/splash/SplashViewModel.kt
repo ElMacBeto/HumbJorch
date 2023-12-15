@@ -59,13 +59,15 @@ class SplashViewModel @Inject constructor(
 
     fun getFacts() {
         _getAllFactsLiveData.value = ResponseStatus.Loading()
-        viewModelScope.launch {
+        CoroutineScope(Dispatchers.IO).launch {
             if (localDS.getCount() > 0) {
                 CoroutineScope(Dispatchers.Main).launch {
                     setDestinationLogin()
                 }
             } else {
-                handelServiceResponseStatus(factsRepository.getFacts())
+                CoroutineScope(Dispatchers.Main).launch {
+                    handelServiceResponseStatus(factsRepository.getFacts())
+                }
             }
         }
     }
@@ -77,7 +79,7 @@ class SplashViewModel @Inject constructor(
     }
 
     fun createEntityInsert(data: ArrayList<FactsModel>) {
-        viewModelScope.launch{
+        viewModelScope.launch {
             data.forEach { factsModel ->
                 localDS.insertEntity(setData(factsModel))
             }
@@ -87,12 +89,12 @@ class SplashViewModel @Inject constructor(
     private fun setData(factsModel: FactsModel): FactsEntity {
         return FactsEntity(
             id = 0,
-            id_api = factsModel.id,
+            id_api = factsModel._id,
             columns = factsModel.columns,
             createdAt = factsModel.createdAt,
             dataset = factsModel.dataset,
             fact = factsModel.fact,
-            dateInsert = factsModel.dateInsert,
+            dateInsert = factsModel.date_insert,
             operations = factsModel.operations,
             organization = factsModel.organization,
             resource = factsModel.resource,
@@ -100,5 +102,4 @@ class SplashViewModel @Inject constructor(
             url = factsModel.url
         )
     }
-
 }

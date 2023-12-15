@@ -23,4 +23,7 @@ interface FactsDAO {
 
     @Query("select max(id) from FACTS")
     fun getMaxId(): Int
+
+    @Query("SELECT * FROM FACTS WHERE isFavorite = :isFavorite LIMIT 5")
+    fun getFavorite(isFavorite: Boolean): List<FactsEntity>
 }

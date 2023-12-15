@@ -27,11 +27,9 @@ class LocalDS @Inject constructor(private val factsDAO: FactsDAO) {
         }
     }
 
-    fun getCount(): Int {
-        var countItem = 0
-        CoroutineScope(Dispatchers.IO).launch {
-            countItem = factsDAO.getCount()
-        }
-        return countItem
-    }
+    fun getCount(): Int = factsDAO.getCount()
+
+
+    fun getFavorite(): List<FactsEntity> = factsDAO.getFavorite(true)
+
 }

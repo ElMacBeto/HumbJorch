@@ -1,5 +1,6 @@
 package com.humbjorch.myapplication.ui.home.dashBoard
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,11 +8,19 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.humbjorch.myapplication.R
+import com.humbjorch.myapplication.data.datSource.ResponseStatus
+import com.humbjorch.myapplication.data.model.FactsEntity
 import com.humbjorch.myapplication.data.model.FactsModel
 import com.humbjorch.myapplication.databinding.FragmentHomeBinding
+import com.humbjorch.myapplication.sis.utils.alerts.CustomToastWidget
+import com.humbjorch.myapplication.sis.utils.alerts.TypeToast
 import com.humbjorch.myapplication.sis.utils.loadImageUrl
+import com.humbjorch.myapplication.ui.home.MainActivity
 import com.humbjorch.myapplication.ui.home.dashBoard.adapter.FactsAdapter
+import com.humbjorch.myapplication.ui.login.LoginActivity
 import com.humbjorch.myapplication.ui.login.LoginSessionViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -22,8 +31,11 @@ class HomeFragment : Fragment() {
     private val sessionViewModel: LoginSessionViewModel by viewModels()
     private lateinit var binding: FragmentHomeBinding
     private lateinit var factAdapter: FactsAdapter
-    private var factList: List<FactsModel> = listOf()
-
+    private var factList: List<FactsEntity> = listOf()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel.getFacts()
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -39,19 +51,45 @@ class HomeFragment : Fragment() {
         binding.imgPhotoProfile.loadImageUrl(sessionViewModel.getImageUrl())
         setAdapter()
         setObservers()
-        viewModel.getFacts()
+        setListenerActions()
+    }
+
+    private fun setListenerActions() {
+        binding.btnAllPost.setOnClickListener {
+            binding.root.findNavController().navigate(R.id.action_navigation_home_to_allListFragment)
+        }
+
+        binding.allFavorite.setOnClickListener {
+            binding.root.findNavController().navigate(R.id.action_navigation_home_to_allListFragment)
+        }
     }
 
     private fun setObservers() {
-        viewModel.getAllFactsLiveData.observe(viewLifecycleOwner){
-            factList = listOf(
-                FactsModel("1","sdf",23,"dfsdfsdfsdfggfg", "324234", "fvcbtrbvbgffbfghgff", "wervzdfadfa", "ewewerwer", "wewerwersfd", "hola mundo", "www.asdasdas.com"),
-                FactsModel("2","sdf",23,"dfsdfsdfsdfggfg", "324234", "fvcbtrbvbgffbfghgff", "wervzdfadfa", "ewewerwer", "wewerwersfd", "hola mundo", "www.asdasdas.com"),
-                FactsModel("3","sdf",23,"dfsdfsdfsdfggfg", "324234", "fvcbtrbvbgffbfghgff", "wervzdfadfa", "ewewerwer", "wewerwersfd", "hola mundo", "www.asdasdas.com"),
-                FactsModel("4","sdf",23,"dfsdfsdfsdfggfg", "324234", "fvcbtrbvbgffbfghgff", "wervzdfadfa", "ewewerwer", "wewerwersfd", "hola mundo", "www.asdasdas.com"),
-                FactsModel("5","sdf",23,"dfsdfsdfsdfggfg", "324234", "fvcbtrbvbgffbfghgff", "wervzdfadfa", "ewewerwer", "wewerwersfd", "hola mundo", "www.asdasdas.com")
-            )
-            factAdapter.updateList(factList)
+        viewModel.getFavoriteFactsLiveData.observe(viewLifecycleOwner) {
+            when (it) {
+                is ResponseStatus.Loading -> {
+                    (activity as MainActivity).showLoader()
+                }
+
+                is ResponseStatus.Success -> {
+                    if((it.data as List<FactsEntity>).isNotEmpty()){
+                        factList = it.data
+                        factAdapter.updateList(factList)
+                    }
+                    binding.root.postDelayed({
+                        (activity as MainActivity).dismissLoader()
+                    }, 3000)
+                }
+
+                is ResponseStatus.Error -> {
+                    (activity as MainActivity).dismissLoader()
+                    CustomToastWidget.show(
+                        activity = requireActivity(),
+                        message = it.messageId,
+                        type = TypeToast.ERROR
+                    )
+                }
+            }
         }
     }
 
@@ -59,7 +97,7 @@ class HomeFragment : Fragment() {
         factAdapter = FactsAdapter(
             dataSet = factList,
             onClick = { fact ->
-                Toast.makeText(requireContext(), fact.id, Toast.LENGTH_SHORT).show()
+                binding.root.findNavController().navigate(R.id.action_navigation_home_to_detailFragment)
             }
         )
         binding.rvFacts.apply {

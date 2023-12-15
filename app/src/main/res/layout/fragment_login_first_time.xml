@@ -29,8 +29,8 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginStart="@dimen/dp24"
-                android:layout_marginEnd="@dimen/dp24"
+                android:layout_marginStart="@dimen/dp16"
+                android:layout_marginEnd="@dimen/dp16"
                 android:layout_marginTop="30dp"
                 android:layout_marginBottom="30dp">
                 <com.google.android.material.textfield.TextInputLayout
@@ -100,7 +100,7 @@
                     style="@style/Button.GradientBorderRounded"
                     android:layout_width="@dimen/dp0"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dp50"
+                    android:layout_marginStart="@dimen/dp20"
                     android:layout_marginTop="@dimen/dp50"
                     android:layout_marginEnd="@dimen/dp8"
                     android:layout_weight="1"
@@ -116,7 +116,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dp8"
-                    android:layout_marginEnd="@dimen/dp50"
+                    android:layout_marginEnd="@dimen/dp20"
                     android:layout_weight="1"
                     android:text="@string/log_in"
                     android:enabled="false"

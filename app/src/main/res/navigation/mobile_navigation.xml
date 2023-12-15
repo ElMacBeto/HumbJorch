@@ -9,6 +9,23 @@
         android:id="@+id/navigation_home"
         android:name="com.humbjorch.myapplication.ui.home.dashBoard.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_detailFragment"
+            app:destination="@id/detailFragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_allListFragment"
+            app:destination="@id/allListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.humbjorch.myapplication.ui.home.detail.DetailFragment"
+        android:label="fragment_detail"
+        tools:layout="@layout/fragment_detail" />
+    <fragment
+        android:id="@+id/allListFragment"
+        android:name="com.humbjorch.myapplication.ui.home.allList.AllListFragment"
+        android:label="fragment_all_list"
+        tools:layout="@layout/fragment_all_list" />
 
 </navigation>

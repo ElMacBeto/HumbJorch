@@ -9,7 +9,7 @@
         <item name="colorSecondaryVariant">@color/colorSecondaryVariant</item>
         <item name="colorOnSecondary">@color/colorOnSecondary</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimary</item>
+        <item name="android:statusBarColor">@color/colorPrimaryVariant</item>
     </style>
 
     <style name="Button.GradientBorderRounded" parent="Widget.MaterialComponents.Button">

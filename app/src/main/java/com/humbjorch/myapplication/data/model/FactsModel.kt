@@ -5,11 +5,11 @@ import androidx.room.PrimaryKey
 import com.humbjorch.myapplication.sis.utils.util.Constants
 
 data class FactsModel(
-    val id: String,
+    val _id: String,
     val columns: String,
     val createdAt: Int,
     val dataset: String,
-    val dateInsert: String,
+    val date_insert: String,
     val fact: String,
     val operations: String,
     val organization: String,

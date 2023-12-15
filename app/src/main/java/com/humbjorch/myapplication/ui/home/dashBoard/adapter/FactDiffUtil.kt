@@ -1,11 +1,12 @@
 package com.humbjorch.myapplication.ui.home.dashBoard.adapter
 
 import androidx.recyclerview.widget.DiffUtil
+import com.humbjorch.myapplication.data.model.FactsEntity
 import com.humbjorch.myapplication.data.model.FactsModel
 
 class FactDiffUtil(
-    private val oldList: List<FactsModel>,
-    private val newList: List<FactsModel>
+    private val oldList: List<FactsEntity>,
+    private val newList: List<FactsEntity>
 ): DiffUtil.Callback() {
     override fun getOldListSize(): Int = oldList.size
 

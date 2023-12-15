@@ -6,7 +6,7 @@
     <data>
         <variable
             name="fatc"
-            type="com.humbjorch.myapplication.data.model.FactsModel" />
+            type="com.humbjorch.myapplication.data.model.FactsEntity" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -66,6 +66,8 @@
                 android:layout_height="wrap_content"
                 tools:text="15 es el numero de bases de datos que la dependencia CDI ha publicado"
                 android:text="@{fatc.fact}"
+                android:maxLines="2"
+                android:ellipsize="end"
                 app:layout_constraintTop_toBottomOf="@+id/tv_fact"
                 app:layout_constraintStart_toStartOf="@+id/tv_fact"
                 app:layout_constraintBottom_toBottomOf="parent"

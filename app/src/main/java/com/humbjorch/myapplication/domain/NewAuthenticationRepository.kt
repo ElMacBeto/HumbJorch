@@ -5,7 +5,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.GoogleAuthProvider
-import com.humbjorch.myapplication.R
 import com.humbjorch.myapplication.data.datSource.ResponseStatus
 import com.humbjorch.myapplication.data.datSource.makeFirebaseCall
 import com.humbjorch.myapplication.data.local.AuthenticationResponse

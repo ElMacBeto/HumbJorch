@@ -6,16 +6,18 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.humbjorch.myapplication.R
-import com.humbjorch.myapplication.data.model.FactsModel
+import com.humbjorch.myapplication.data.model.FactsEntity
 import com.humbjorch.myapplication.databinding.ItemFactBinding
+import com.humbjorch.myapplication.sis.utils.formatDate
+import com.humbjorch.myapplication.sis.utils.toDateFormatMonths
 
 class FactsAdapter(
-    private var dataSet: List<FactsModel>,
-    private val onClick: (FactsModel) -> Unit
+    private var dataSet: List<FactsEntity>,
+    private val onClick: (FactsEntity) -> Unit
 ) :
     RecyclerView.Adapter<FactsAdapter.ViewHolder>() {
 
-    fun updateList(newList: List<FactsModel>, itemPosition:Int = -1){
+    fun updateList(newList: List<FactsEntity>, itemPosition:Int = -1){
         if (itemPosition >= 0){
             notifyItemChanged(itemPosition)
         }else{
@@ -30,8 +32,9 @@ class FactsAdapter(
 
         val binding = ItemFactBinding.bind(view)
 
-        fun bindView(fact: FactsModel) {
+        fun bindView(fact: FactsEntity) {
             binding.fatc = fact
+            binding.tvDate.text = formatDate(fact.dateInsert!!).toDateFormatMonths()
         }
     }
 
