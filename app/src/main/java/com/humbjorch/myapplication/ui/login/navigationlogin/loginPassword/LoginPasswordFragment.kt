@@ -42,6 +42,19 @@ class LoginPasswordFragment : Fragment() {
         override fun handleOnBackPressed() {
             if (!(activity as LoginActivity).START_DESTINATION_PASSWORD) {
                 binding.root.findNavController().popBackStack()
+            }else{
+                (activity as LoginActivity).genericAlert(
+                    titleAlert = getString(R.string.custom_dialog_title),
+                    descriptionAlert = getString(R.string.custom_dialog_body),
+                    txtBtnNegativeAlert = getString(R.string.cancel_dialog),
+                    txtBtnPositiveAlert = getString(R.string.dialog_confirm),
+                    buttonPositiveAction = {
+                        (activity as LoginActivity).finish()
+                    },
+                    buttonNegativeAction = {
+
+                    }
+                )
             }
         }
     }

@@ -47,7 +47,18 @@ class GoogleSessionFragment : Fragment() {
 
     private val onBackPressed = object : OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {
+            (activity as LoginActivity).genericAlert(
+                titleAlert = getString(R.string.custom_dialog_title),
+                descriptionAlert = getString(R.string.custom_dialog_body),
+                txtBtnNegativeAlert = getString(R.string.cancel_dialog),
+                txtBtnPositiveAlert = getString(R.string.dialog_confirm),
+                buttonPositiveAction = {
+                    (activity as LoginActivity).finish()
+                },
+                buttonNegativeAction = {
 
+                }
+            )
         }
     }
 

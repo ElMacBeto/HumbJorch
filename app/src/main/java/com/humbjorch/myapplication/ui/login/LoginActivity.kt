@@ -1,19 +1,16 @@
 package com.humbjorch.myapplication.ui.login
 
+import android.app.Activity
+import android.content.DialogInterface
 import android.os.Bundle
-import android.window.OnBackInvokedDispatcher
-import androidx.activity.OnBackPressedCallback
-import androidx.activity.OnBackPressedDispatcher
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.FragmentManager
-import androidx.navigation.findNavController
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
 import com.humbjorch.myapplication.R
+import com.humbjorch.myapplication.sis.utils.alerts.GenericDialog
 import com.humbjorch.myapplication.sis.utils.alerts.LoaderNBEXWidget
 import com.humbjorch.myapplication.sis.utils.launchTimer
-import com.humbjorch.myapplication.sis.utils.timer.CheckConnection
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.Timer
 
 @AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
@@ -50,6 +47,43 @@ class LoginActivity : AppCompatActivity() {
                 loader.dismiss()
             } else {
                 loader.dismissAllowingStateLoss()
+            }
+        }
+    }
+
+
+    fun genericAlert(
+        imageAlert: Int = R.drawable.generic_icon_warning,
+        titleAlert: String,
+        descriptionAlert: String,
+        txtBtnPositiveAlert: String,
+        txtBtnNegativeAlert: String,
+        isCancelableAlert: Boolean = false,
+        buttonPositiveAction: (() -> Unit)? = null,
+        buttonNegativeAction: (() -> Unit)? = null,
+    ) {
+        lifecycleScope.launchWhenResumed {
+            GenericDialog().apply {
+                imgDialog = imageAlert
+                txtConfirm = txtBtnPositiveAlert
+                txtCancel = txtBtnNegativeAlert
+                txtTitle = titleAlert
+                txtMessageAlert = descriptionAlert
+                isCancelable = isCancelableAlert
+                listener = object : GenericDialog.OnClickListener {
+                    override fun onClick(which: Int) {
+                        when (which) {
+                            DialogInterface.BUTTON_POSITIVE -> {
+                                buttonPositiveAction?.invoke()
+                            }
+
+                            else -> {
+                                buttonNegativeAction?.invoke()
+                            }
+                        }
+                    }
+                }
+                this.show(supportFragmentManager, System.currentTimeMillis().toString())
             }
         }
     }

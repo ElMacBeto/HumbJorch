@@ -24,4 +24,7 @@
     <dimen name="dp90">90dp</dimen>
     <dimen name="dp75">75dp</dimen>
     <dimen name="dp4">4dp</dimen>
+    <dimen name="sp20">20sp</dimen>
+    <dimen name="sp4">4sp</dimen>
+    <dimen name="sp18">18sp</dimen>
 </resources>

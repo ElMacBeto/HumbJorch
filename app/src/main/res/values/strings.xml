@@ -53,5 +53,7 @@
     <string name="label_error_red">Initialization Error</string>
     <string name="tv_error_description">App failed to start. Please check your connection and try again. If issue persists, reinstall the application.</string>
     <string name="label_finish_session">Finish</string>
+    <string name="custom_dialog_title">Confirm Exit</string>
+    <string name="custom_dialog_body">Are you sure you want to exit? Unsaved data will be lost. Confirm to exit.</string>
 
 </resources>

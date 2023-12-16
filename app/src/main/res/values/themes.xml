@@ -45,5 +45,14 @@
         <item name="android:layout_marginEnd">@dimen/dp20</item>
     </style>
 
-
+    <style name="FullScreenDialogStyle" parent="Theme.AppCompat.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="colorPrimaryDark">@color/colorBlue1</item>
+        <item name="colorPrimary">@color/colorBlue2</item>
+        <item name="colorAccent">@color/colorBlue2</item>
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowBackground">@color/colorWhite</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+    </style>
 </resources>

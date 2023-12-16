@@ -2,13 +2,18 @@ package com.humbjorch.myapplication.sis.utils
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.DialogInterface
 import android.os.Build
+import android.view.View
 import androidx.annotation.RequiresApi
+import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
+import com.humbjorch.myapplication.R
 import com.humbjorch.myapplication.sis.utils.timer.CheckConnection
 import com.humbjorch.myapplication.sis.utils.util.Constants.PHOTO_AUTHENTICATION_DEFAULT
+import com.humbjorch.myapplication.sis.utils.util.SafeClickListener
 import de.hdodenhof.circleimageview.CircleImageView
 import java.text.DateFormat
 import java.text.DateFormatSymbols
@@ -39,7 +44,7 @@ fun CircleImageView.loadImageUrl(resource: String?) {
 
 fun Activity.launchTimer() {
     val timer = Timer()
-    timer.schedule(CheckConnection(this), 0, 4000)
+    timer.schedule(CheckConnection(this), 0, 10000)
 }
 
 @SuppressLint("SimpleDateFormat")
@@ -70,4 +75,11 @@ fun formatDate(inputDate: String): String {
     val outputFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd")
 
     return outputFormatter.format(localDateTime)
+}
+
+fun View.setSafeOnClickListener(onSafeClick: (View) -> Unit) {
+    val safeClickListener = SafeClickListener {
+        onSafeClick(it)
+    }
+    setOnClickListener(safeClickListener)
 }
