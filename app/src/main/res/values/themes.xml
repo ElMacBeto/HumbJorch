@@ -55,4 +55,5 @@
         <item name="android:windowBackground">@color/colorWhite</item>
         <item name="android:fontFamily">@font/roboto_medium</item>
     </style>
+
 </resources>

@@ -55,5 +55,6 @@
     <string name="label_finish_session">Finish</string>
     <string name="custom_dialog_title">Confirm Exit</string>
     <string name="custom_dialog_body">Are you sure you want to exit? Unsaved data will be lost. Confirm to exit.</string>
+    <string name="label_share">share</string>
 
 </resources>

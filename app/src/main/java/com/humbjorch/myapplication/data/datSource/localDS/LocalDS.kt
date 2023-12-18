@@ -18,14 +18,7 @@ class LocalDS @Inject constructor(private val factsDAO: FactsDAO) {
         }
     }
 
-    fun getDataLocal(observer: Observer<List<FactsEntity>>) {
-        CoroutineScope(Dispatchers.IO).launch {
-            val facts = factsDAO.getAllData()
-            withContext(Dispatchers.Main) {
-                observer.onChanged(facts)
-            }
-        }
-    }
+    fun getDataLocal(limit:Int): List<FactsEntity> = factsDAO.getAllData(limit)
 
     fun getCount(): Int = factsDAO.getCount()
 

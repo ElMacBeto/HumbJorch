@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="fact"
+            type="com.humbjorch.myapplication.data.model.FactsEntity" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -31,9 +33,122 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:padding="@dimen/dp16">
+                <TextView
+                    android:id="@+id/tv_slug"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textAllCaps="true"
+                    tools:text="INMUJERES"
+                    android:text="@{fact.slug}"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/sp20"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/img_favorite"/>
+
+                <ImageView
+                    android:id="@+id/img_favorite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_favorite"
+                    app:tint="@color/red1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tv_slug"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_slug"/>
+
+                <TextView
+                    android:id="@+id/tv_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="15 es el numero de bases de datos que la dependencia CDI ha publicado"
+                    android:text="@{fact.organization}"
+                    android:textSize="@dimen/sp16"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="@dimen/dp35"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_slug"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                <ImageView
+                    android:id="@+id/img_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_number"
+                    android:layout_marginTop="@dimen/dp16"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_description"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_database"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp16"
+                    tools:text="Numero de bases de datos"
+                    android:text="@{fact.dataset}"
+                    android:layout_marginStart="@dimen/dp16"
+                    app:layout_constraintTop_toTopOf="@+id/img_number"
+                    app:layout_constraintBottom_toBottomOf="@+id/img_number"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/img_number"/>
+
+                <TextView
+                    android:id="@+id/tv_rutine"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp16"
+                    android:layout_marginTop="@dimen/dp16"
+                    android:text="@{fact.slug}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_database"
+                    tools:text="Rutina de R"/>
+
+                <TextView
+                    android:id="@+id/tv_id"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp16"
+                    android:text="@{fact.id_api}"
+                    android:layout_marginTop="@dimen/dp16"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_rutine"
+                    tools:text="R213123123132k 31sj"/>
+
+                <TextView
+                    android:id="@+id/tv_link"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp16"
+                    android:layout_marginTop="@dimen/dp16"
+                    android:text="@{fact.url}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_id"
+                    tools:text="https://www.figma.com/file"/>
+                <Button
+                    style="@style/Button.General"
+                    android:id="@+id/btn_share"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_share"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_link"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
         </androidx.cardview.widget.CardView>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

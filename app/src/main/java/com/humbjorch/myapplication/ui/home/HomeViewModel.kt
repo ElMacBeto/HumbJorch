@@ -1,4 +1,4 @@
-package com.humbjorch.myapplication.ui.home.dashBoard
+package com.humbjorch.myapplication.ui.home
 
 import android.annotation.SuppressLint
 import androidx.lifecycle.LiveData
@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.humbjorch.myapplication.data.datSource.ResponseStatus
 import com.humbjorch.myapplication.data.model.FactsEntity
-import com.humbjorch.myapplication.data.model.FactsModel
 import com.humbjorch.myapplication.domain.MemoryLocalRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -16,13 +15,23 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(private val repository: MemoryLocalRepository) :
     ViewModel() {
+
     private var _getFavoriteFactsLiveData = MutableLiveData<ResponseStatus<Any>>()
     val getFavoriteFactsLiveData: LiveData<ResponseStatus<Any>> get() = _getFavoriteFactsLiveData
 
-    fun getFacts() {
+
+
+    fun getFavoritesFacts() {
         _getFavoriteFactsLiveData.value = ResponseStatus.Loading()
         viewModelScope.launch {
             handelServiceResponseStatus(repository.getFavorites())
+        }
+    }
+
+    fun getAllFacts(limit:Int) {
+        _getFavoriteFactsLiveData.value = ResponseStatus.Loading()
+        viewModelScope.launch {
+            handelServiceResponseStatus(repository.getFacts(limit))
         }
     }
 
@@ -31,4 +40,5 @@ class HomeViewModel @Inject constructor(private val repository: MemoryLocalRepos
     private fun handelServiceResponseStatus(apiResponseStatus: ResponseStatus<List<FactsEntity>>) {
         _getFavoriteFactsLiveData.value = apiResponseStatus as ResponseStatus<Any>
     }
+
 }

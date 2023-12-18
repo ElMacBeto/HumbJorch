@@ -1,8 +1,10 @@
 package com.humbjorch.myapplication.ui.home.dashBoard.adapter
 
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.humbjorch.myapplication.R
@@ -16,6 +18,9 @@ class FactsAdapter(
     private val onClick: (FactsEntity) -> Unit
 ) :
     RecyclerView.Adapter<FactsAdapter.ViewHolder>() {
+
+    var onChargePage:  (() -> Unit)? = null
+
 
     fun updateList(newList: List<FactsEntity>, itemPosition:Int = -1){
         if (itemPosition >= 0){
@@ -32,6 +37,7 @@ class FactsAdapter(
 
         val binding = ItemFactBinding.bind(view)
 
+        @RequiresApi(Build.VERSION_CODES.O)
         fun bindView(fact: FactsEntity) {
             binding.fatc = fact
             binding.tvDate.text = formatDate(fact.dateInsert!!).toDateFormatMonths()
@@ -44,8 +50,13 @@ class FactsAdapter(
         return ViewHolder(view)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val fact = dataSet[position]
+
+        if(position == (itemCount -1)){
+            onChargePage?.invoke()
+        }
 
         viewHolder.bindView(fact)
         viewHolder.binding.imgDetail.setOnClickListener{

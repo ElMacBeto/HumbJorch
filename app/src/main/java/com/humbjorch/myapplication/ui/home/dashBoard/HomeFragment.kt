@@ -1,11 +1,9 @@
 package com.humbjorch.myapplication.ui.home.dashBoard
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
@@ -13,14 +11,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.humbjorch.myapplication.R
 import com.humbjorch.myapplication.data.datSource.ResponseStatus
 import com.humbjorch.myapplication.data.model.FactsEntity
-import com.humbjorch.myapplication.data.model.FactsModel
 import com.humbjorch.myapplication.databinding.FragmentHomeBinding
 import com.humbjorch.myapplication.sis.utils.alerts.CustomToastWidget
 import com.humbjorch.myapplication.sis.utils.alerts.TypeToast
 import com.humbjorch.myapplication.sis.utils.loadImageUrl
+import com.humbjorch.myapplication.ui.home.HomeViewModel
 import com.humbjorch.myapplication.ui.home.MainActivity
 import com.humbjorch.myapplication.ui.home.dashBoard.adapter.FactsAdapter
-import com.humbjorch.myapplication.ui.login.LoginActivity
 import com.humbjorch.myapplication.ui.login.LoginSessionViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -34,7 +31,7 @@ class HomeFragment : Fragment() {
     private var factList: List<FactsEntity> = listOf()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.getFacts()
+        viewModel.getFavoritesFacts()
     }
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -56,11 +53,13 @@ class HomeFragment : Fragment() {
 
     private fun setListenerActions() {
         binding.btnAllPost.setOnClickListener {
-            binding.root.findNavController().navigate(R.id.action_navigation_home_to_allListFragment)
+            val action = HomeFragmentDirections.actionNavigationHomeToAllListFragment(false)
+            binding.root.findNavController().navigate(action)
         }
 
         binding.allFavorite.setOnClickListener {
-            binding.root.findNavController().navigate(R.id.action_navigation_home_to_allListFragment)
+            val action = HomeFragmentDirections.actionNavigationHomeToAllListFragment(true)
+            binding.root.findNavController().navigate(action)
         }
     }
 

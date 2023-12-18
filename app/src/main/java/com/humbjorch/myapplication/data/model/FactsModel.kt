@@ -1,8 +1,10 @@
 package com.humbjorch.myapplication.data.model
 
+import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.humbjorch.myapplication.sis.utils.util.Constants
+import kotlinx.parcelize.Parcelize
 
 data class FactsModel(
     val _id: String,
@@ -17,6 +19,7 @@ data class FactsModel(
     val slug: String,
     val url: String
 )
+@Parcelize
 @Entity(tableName = Constants.TABLE_FACTS_ENTITY)
 data class FactsEntity(
     @PrimaryKey(autoGenerate = true) var id: Int,
@@ -33,4 +36,4 @@ data class FactsEntity(
     val url: String?,
     // TODO: isFavorite
     var isFavorite:Boolean = false
-)
+) : Parcelable

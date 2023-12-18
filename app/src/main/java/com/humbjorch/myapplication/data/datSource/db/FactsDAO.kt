@@ -12,8 +12,8 @@ interface FactsDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertData(factsEntity: FactsEntity)
 
-    @Query("SELECT * FROM FACTS")
-    fun getAllData(): List<FactsEntity>
+    @Query("SELECT * FROM FACTS LIMIT :limit, 10")
+    fun getAllData(limit:Int): List<FactsEntity>
 
     @Update
     fun updateData(clients: FactsEntity): Int

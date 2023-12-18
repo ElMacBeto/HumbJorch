@@ -15,7 +15,12 @@
             app:destination="@id/detailFragment" />
         <action
             android:id="@+id/action_navigation_home_to_allListFragment"
-            app:destination="@id/allListFragment" />
+            app:destination="@id/allListFragment" >
+            <argument
+                android:name="isVavoriteView"
+                app:argType="boolean"
+                app:nullable="false" />
+        </action>
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
@@ -26,6 +31,15 @@
         android:id="@+id/allListFragment"
         android:name="com.humbjorch.myapplication.ui.home.allList.AllListFragment"
         android:label="fragment_all_list"
-        tools:layout="@layout/fragment_all_list" />
+        tools:layout="@layout/fragment_all_list" >
+        <action
+            android:id="@+id/action_allListFragment_to_detailFragment"
+            app:destination="@id/detailFragment">
+            <argument
+                android:name="fact"
+                app:argType="com.humbjorch.myapplication.data.model.FactsEntity"
+                app:nullable="false" />
+        </action>
+    </fragment>
 
 </navigation>

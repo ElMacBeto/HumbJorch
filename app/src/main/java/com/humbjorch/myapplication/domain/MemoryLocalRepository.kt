@@ -12,6 +12,9 @@ import kotlinx.coroutines.withContext
 
 interface DataBaseConnectionTask {
     suspend fun getFavorites(): ResponseStatus<List<FactsEntity>>
+
+    suspend fun getAllFavorites(limit:Int): ResponseStatus<List<FactsEntity>>
+    suspend fun getFacts(limit:Int): ResponseStatus<List<FactsEntity>>
 }
 
 @Singleton
@@ -30,6 +33,23 @@ class MemoryLocalRepository @Inject constructor(private val localDS: LocalDS) :
         }
     }
 
+    override suspend fun getAllFavorites(limit:Int): ResponseStatus<List<FactsEntity>> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getFacts(limit:Int): ResponseStatus<List<FactsEntity>> {
+        return withContext(Dispatchers.IO){
+            val getFavorite = async { getAllFacts(limit) }
+            val getFactsResponse = getFavorite.await()
+
+            if(getFactsResponse is ResponseStatus.Success){
+                ResponseStatus.Success(getFactsResponse.data)
+            }else{
+                ResponseStatus.Error((getFactsResponse as ResponseStatus.Error).messageId)
+            }
+        }
+    }
+
     private suspend fun getFavorite(): ResponseStatus<List<FactsEntity>> = makeFirebaseCall {
         val response = getResponseData()
         response
@@ -37,5 +57,14 @@ class MemoryLocalRepository @Inject constructor(private val localDS: LocalDS) :
 
     private fun getResponseData(): List<FactsEntity> {
         return localDS.getFavorite()
+    }
+
+    private suspend fun getAllFacts(limit: Int): ResponseStatus<List<FactsEntity>> = makeFirebaseCall {
+        val response = getResponseFacts(limit)
+        response
+    }
+
+    private fun getResponseFacts(limit:Int): List<FactsEntity> {
+        return localDS.getDataLocal(limit)
     }
 }
