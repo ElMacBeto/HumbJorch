@@ -20,7 +20,7 @@ class LoginSessionViewModel @Inject constructor(
     private val authenticationRepository: NewAuthenticationRepository
 ) :
     ViewModel() {
-    private fun getEmail() = moduleSharePreference.getEmail()
+    fun getEmail() = moduleSharePreference.getEmail()
     fun getImageUrl() = moduleSharePreference.getPhoto()
     fun getTouchId() = moduleSharePreference.getTouchId()
 

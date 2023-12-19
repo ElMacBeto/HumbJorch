@@ -5,7 +5,10 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.GoogleAuthProvider
+import com.humbjorch.myapplication.App
+import com.humbjorch.myapplication.R
 import com.humbjorch.myapplication.data.datSource.ResponseStatus
+import com.humbjorch.myapplication.data.datSource.localDS.LocalDS
 import com.humbjorch.myapplication.data.datSource.makeFirebaseCall
 import com.humbjorch.myapplication.data.local.AuthenticationResponse
 import com.humbjorch.myapplication.sis.di.FirebaseClientModule
@@ -29,6 +32,8 @@ interface ConnectionTask {
         touchId: Boolean
     ): ResponseStatus<AuthenticationResponse>
 
+    suspend fun logOut(): ResponseStatus<Boolean>
+
     fun getClientProvide(): GoogleSignInClient
 
     suspend fun loginUser(
@@ -41,7 +46,8 @@ interface ConnectionTask {
 @Singleton
 class NewAuthenticationRepository @Inject constructor(
     private val auth: FirebaseClientModule,
-    private val moduleSharePreference: ModuleSharePreference
+    private val moduleSharePreference: ModuleSharePreference,
+    private val localDS: LocalDS
 ) : ConnectionTask {
     private val authFirebase = auth.getInstanceFirebaseAuth()
 
@@ -111,6 +117,48 @@ class NewAuthenticationRepository @Inject constructor(
                 ResponseStatus.Error((getAuthRegisterResponse as ResponseStatus.Error).messageId)
             }
         }
+    }
+
+    override suspend fun logOut(): ResponseStatus<Boolean> {
+        return withContext(Dispatchers.IO) {
+            val deleteBD = async { deleteBDAs() }
+            val deleteBDResponse = deleteBD.await()
+
+            val loOut = async { loOutAs() }
+            val loOutResponse = loOut.await()
+
+            if (deleteBDResponse is ResponseStatus.Success && loOutResponse is ResponseStatus.Success) {
+                moduleSharePreference.clearPreferences()
+                ResponseStatus.Success(true)
+            } else {
+                ResponseStatus.Error(App.instance.getString(R.string.error_sing_out))
+            }
+        }
+    }
+
+    private suspend fun loOutAs(): ResponseStatus<Boolean> = makeFirebaseCall {
+        val response = loOutAsResponse()
+        response
+    }
+
+    private fun loOutAsResponse(): Boolean {
+        val signOutFirebase: Boolean = auth.signOutFirebase().let {
+            true
+        }
+
+        val signOutGoogle: Boolean = auth.signOutGoogle().isSuccessful
+
+        return signOutFirebase && signOutGoogle
+    }
+
+
+    private suspend fun deleteBDAs(): ResponseStatus<Boolean> = makeFirebaseCall {
+        val response = deleteDBResponse()
+        response
+    }
+
+    private fun deleteDBResponse(): Boolean {
+        return localDS.delete() > 0
     }
 
     private suspend fun getAuthRegister(

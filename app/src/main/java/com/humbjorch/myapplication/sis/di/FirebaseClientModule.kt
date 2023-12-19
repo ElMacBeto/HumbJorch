@@ -14,12 +14,6 @@ import javax.inject.Singleton
 
 @Singleton
 class FirebaseClientModule @Inject constructor(context: Context) {
-    /* val auth : FirebaseAuth get() = FirebaseAuth.getInstance()
-     val userCollection = Firebase.firestore.collection(Constantes.USERS_COLLECTION)
-     val storage = FirebaseStorage.getInstance().getReference(Constantes.PATH_FIREBASE_STORAGE).child(
-         Constantes.PATH_CHILD_FIREBASE_STORAGE
-     )*/
-
     val getInstance = FirebaseAuth.getInstance()
     fun getInstanceFirebaseAuth(): FirebaseAuth = Firebase.auth
 
@@ -30,6 +24,6 @@ class FirebaseClientModule @Inject constructor(context: Context) {
 
     val googleSing = GoogleSignIn.getClient(context, gson)
 
-    fun signOutFirebase() = FirebaseAuth.getInstance().signOut()
+    fun signOutFirebase() = getInstance.signOut()
     fun signOutGoogle() = googleSing.signOut()
 }

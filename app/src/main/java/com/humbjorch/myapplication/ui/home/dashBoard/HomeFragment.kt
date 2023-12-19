@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
@@ -17,7 +18,10 @@ import com.humbjorch.myapplication.sis.utils.alerts.TypeToast
 import com.humbjorch.myapplication.sis.utils.loadImageUrl
 import com.humbjorch.myapplication.ui.home.HomeViewModel
 import com.humbjorch.myapplication.ui.home.MainActivity
+import com.humbjorch.myapplication.ui.home.MainActivity.Companion.CHANGE_HOME_LIST
+import com.humbjorch.myapplication.ui.home.allList.AllListFragmentDirections
 import com.humbjorch.myapplication.ui.home.dashBoard.adapter.FactsAdapter
+import com.humbjorch.myapplication.ui.login.LoginActivity
 import com.humbjorch.myapplication.ui.login.LoginSessionViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -29,10 +33,29 @@ class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var factAdapter: FactsAdapter
     private var factList: List<FactsEntity> = listOf()
+
+    private val onBackPressed = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            (activity as MainActivity).genericAlert(
+                titleAlert = getString(R.string.custom_dialog_title),
+                descriptionAlert = getString(R.string.custom_dialog_body),
+                txtBtnNegativeAlert = getString(R.string.cancel_dialog),
+                txtBtnPositiveAlert = getString(R.string.dialog_confirm),
+                buttonPositiveAction = {
+                    (activity as MainActivity).finish()
+                },
+                buttonNegativeAction = {
+
+                }
+            )
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel.getFavoritesFacts()
     }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -45,6 +68,7 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, onBackPressed)
         binding.imgPhotoProfile.loadImageUrl(sessionViewModel.getImageUrl())
         setAdapter()
         setObservers()
@@ -61,6 +85,21 @@ class HomeFragment : Fragment() {
             val action = HomeFragmentDirections.actionNavigationHomeToAllListFragment(true)
             binding.root.findNavController().navigate(action)
         }
+
+        binding.imgProfile.setOnClickListener {
+            (activity as MainActivity).genericAlert(
+                titleAlert = getString(R.string.custom_sign_off),
+                descriptionAlert = getString(R.string.custom_dialog_session),
+                txtBtnNegativeAlert = getString(R.string.cancel_dialog),
+                txtBtnPositiveAlert = getString(R.string.dialog_confirm),
+                buttonPositiveAction = {
+                    viewModel.singOut()
+                },
+                buttonNegativeAction = {
+
+                }
+            )
+        }
     }
 
     private fun setObservers() {
@@ -71,9 +110,11 @@ class HomeFragment : Fragment() {
                 }
 
                 is ResponseStatus.Success -> {
-                    if((it.data as List<FactsEntity>).isNotEmpty()){
+                    if ((it.data as List<FactsEntity>).isNotEmpty()) {
                         factList = it.data
                         factAdapter.updateList(factList)
+                    } else {
+                        factAdapter.updateList(emptyList())
                     }
                     binding.root.postDelayed({
                         (activity as MainActivity).dismissLoader()
@@ -88,7 +129,41 @@ class HomeFragment : Fragment() {
                         type = TypeToast.ERROR
                     )
                 }
+
+                null -> {}
             }
+        }
+
+        viewModel.singOutLiveData.observe(viewLifecycleOwner) {
+            when (it) {
+                is ResponseStatus.Loading -> {}
+
+                is ResponseStatus.Success -> {
+                    if ((it.data as Boolean))
+                    CustomToastWidget.show(
+                        requireActivity(),
+                        getString(R.string.message_exit),
+                        TypeToast.SUCCESS
+                    )
+                    (activity as MainActivity).goToLogin()
+                }
+
+                is ResponseStatus.Error -> {
+                    CustomToastWidget.show(
+                        activity = requireActivity(),
+                        message = it.messageId,
+                        type = TypeToast.ERROR
+                    )
+                }
+            }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (CHANGE_HOME_LIST) {
+            viewModel.getFavoritesFacts()
+            CHANGE_HOME_LIST = false
         }
     }
 
@@ -96,7 +171,8 @@ class HomeFragment : Fragment() {
         factAdapter = FactsAdapter(
             dataSet = factList,
             onClick = { fact ->
-                binding.root.findNavController().navigate(R.id.action_navigation_home_to_detailFragment)
+                val action = HomeFragmentDirections.actionNavigationHomeToDetailFragment(fact)
+                binding.root.findNavController().navigate(action)
             }
         )
         binding.rvFacts.apply {

@@ -4,13 +4,19 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.DialogInterface
 import android.os.Build
+import android.text.SpannableStringBuilder
 import android.view.View
+import android.widget.TextView
 import androidx.annotation.RequiresApi
+import androidx.core.text.bold
+import androidx.core.text.color
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
+import com.humbjorch.myapplication.App
 import com.humbjorch.myapplication.R
+import com.humbjorch.myapplication.sis.utils.alerts.CustomToastWidget
 import com.humbjorch.myapplication.sis.utils.timer.CheckConnection
 import com.humbjorch.myapplication.sis.utils.util.Constants.PHOTO_AUTHENTICATION_DEFAULT
 import com.humbjorch.myapplication.sis.utils.util.SafeClickListener
@@ -82,4 +88,18 @@ fun View.setSafeOnClickListener(onSafeClick: (View) -> Unit) {
         onSafeClick(it)
     }
     setOnClickListener(safeClickListener)
+}
+
+fun Boolean.getDrawableFavorite(): Int {
+    return if (this) {
+        R.drawable.ic_favorite_active
+    } else {
+        R.drawable.ic_favorite
+    }
+}
+
+fun TextView.latitudeLongitudeFormat(type: String, value: String) {
+    this.text = SpannableStringBuilder()
+        .bold { color(App.instance.getColor(R.color.black)) { append("$type: ") } }
+        .color(App.instance.getColor(R.color.colorBlue11)) { append(value) }
 }

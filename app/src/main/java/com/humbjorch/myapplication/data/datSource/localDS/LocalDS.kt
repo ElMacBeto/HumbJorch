@@ -22,7 +22,12 @@ class LocalDS @Inject constructor(private val factsDAO: FactsDAO) {
 
     fun getCount(): Int = factsDAO.getCount()
 
-
     fun getFavorite(): List<FactsEntity> = factsDAO.getFavorite(true)
+
+    fun updateData(factsEntity: FactsEntity) =
+        factsDAO.updateData(factsEntity)
+
+    fun delete() = factsDAO.deleteTable()
+
 
 }

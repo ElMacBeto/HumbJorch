@@ -18,6 +18,8 @@ import com.humbjorch.myapplication.sis.utils.alerts.TypeToast
 import com.humbjorch.myapplication.ui.home.HomeViewModel
 import com.humbjorch.myapplication.ui.home.MainActivity
 import com.humbjorch.myapplication.ui.home.dashBoard.adapter.FactsAdapter
+import com.humbjorch.myapplication.ui.home.detail.DetailFragment
+import com.humbjorch.myapplication.ui.home.detail.FACT
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -33,7 +35,7 @@ class AllListFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            isFavoriteView = it.getBoolean("fact")
+            isFavoriteView = it.getBoolean(FACT)
         }
     }
 
@@ -53,7 +55,7 @@ class AllListFragment : Fragment() {
         getFactList()
     }
 
-    private fun getFactList(){
+    private fun getFactList() {
         if (factList.isNotEmpty())
             return
         if (isFavoriteView)
@@ -70,7 +72,9 @@ class AllListFragment : Fragment() {
                 }
 
                 is ResponseStatus.Success -> {
-                    if((it.data as List<FactsEntity>).isNotEmpty()){
+                    val listBD = (it.data as List<FactsEntity>)
+
+                    if (listBD.isNotEmpty()) {
                         it.data.forEach { fact ->
                             factList = factList.plus(fact)
                         }
@@ -89,9 +93,10 @@ class AllListFragment : Fragment() {
                         type = TypeToast.ERROR
                     )
                 }
+
+                null -> {}
             }
         }
-
     }
 
     private fun setAdapter() {
@@ -99,7 +104,7 @@ class AllListFragment : Fragment() {
             dataSet = factList,
             onClick = { fact ->
                 val action = AllListFragmentDirections.actionAllListFragmentToDetailFragment(fact)
-                 binding.root.findNavController().navigate(action)
+                binding.root.findNavController().navigate(action)
             }
         )
 
@@ -115,17 +120,17 @@ class AllListFragment : Fragment() {
     }
 
     private fun setSearchView() {
-        binding.svFacts.setOnQueryTextListener(object :SearchView.OnQueryTextListener{
+        binding.svFacts.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(input: String?): Boolean {
                 return false
             }
 
             override fun onQueryTextChange(input: String?): Boolean {
-                if (!input.isNullOrEmpty()){
+                if (!input.isNullOrEmpty()) {
                     stopPagination = false
                     val filterList = getFilterList(input)
                     factAdapter.updateList(filterList)
-                }else{
+                } else {
                     stopPagination = true
                     factAdapter.updateList(factList)
                 }
@@ -134,14 +139,17 @@ class AllListFragment : Fragment() {
         })
     }
 
-    private fun getFilterList(query: String): List<FactsEntity>{
-            val list = factList
-            return list.filter { fact ->
-                fact.slug?.lowercase()!!.contains(query.lowercase()) ||
-                        fact.fact?.lowercase()!!.contains(query.lowercase()) ||
-                        fact.id_api?.lowercase()!!.contains(query.lowercase())
-            }
+    private fun getFilterList(query: String): List<FactsEntity> {
+        val list = factList
+        return list.filter { fact ->
+            fact.slug?.lowercase()!!.contains(query.lowercase()) ||
+                    fact.fact?.lowercase()!!.contains(query.lowercase()) ||
+                    fact.id_api?.lowercase()!!.contains(query.lowercase())
+        }
     }
 
-
+    override fun onPause() {
+        super.onPause()
+        viewModel.clearLivedata()
+    }
 }

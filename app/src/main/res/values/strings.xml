@@ -56,5 +56,10 @@
     <string name="custom_dialog_title">Confirm Exit</string>
     <string name="custom_dialog_body">Are you sure you want to exit? Unsaved data will be lost. Confirm to exit.</string>
     <string name="label_share">share</string>
+    <string name="updateSuccess">Update successful! Your data is now current.</string>
+    <string name="custom_sign_off">Sign off</string>
+    <string name="custom_dialog_session">Are you sure? Logging out will end your session. Confirm to proceed.</string>
+    <string name="message_exit">Logout successful! See you next time.</string>
+    <string name="error_sing_out">Error during logout. Please try again later or contact support for assistance.</string>
 
 </resources>
