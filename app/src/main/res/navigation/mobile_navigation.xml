@@ -12,7 +12,13 @@
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_navigation_home_to_detailFragment"
-            app:destination="@id/detailFragment" />
+            app:destination="@id/detailFragment">
+
+            <argument
+                android:name="fact"
+                app:argType="com.humbjorch.myapplication.data.model.FactsEntity"
+                app:nullable="false" />
+        </action>
         <action
             android:id="@+id/action_navigation_home_to_allListFragment"
             app:destination="@id/allListFragment" >

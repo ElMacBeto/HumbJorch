@@ -13,8 +13,9 @@ import kotlinx.coroutines.withContext
 interface DataBaseConnectionTask {
     suspend fun getFavorites(limit:Int): ResponseStatus<List<FactsEntity>>
 
-    suspend fun getAllFavorites(limit:Int): ResponseStatus<List<FactsEntity>>
-    suspend fun getFacts(limit:Int): ResponseStatus<List<FactsEntity>>
+    suspend fun getAllFavorites(limit: Int): ResponseStatus<List<FactsEntity>>
+    suspend fun getFacts(limit: Int): ResponseStatus<List<FactsEntity>>
+    suspend fun updateData(factsEntity: FactsEntity): ResponseStatus<Int>
 }
 
 @Singleton
@@ -25,26 +26,26 @@ class MemoryLocalRepository @Inject constructor(private val localDS: LocalDS) :
             val getFavorite = async { getFavorite(limit) }
             val getFavoriteResponse = getFavorite.await()
 
-            if(getFavoriteResponse is ResponseStatus.Success){
+            if (getFavoriteResponse is ResponseStatus.Success) {
                 ResponseStatus.Success(getFavoriteResponse.data)
-            }else{
+            } else {
                 ResponseStatus.Error((getFavoriteResponse as ResponseStatus.Error).messageId)
             }
         }
     }
 
-    override suspend fun getAllFavorites(limit:Int): ResponseStatus<List<FactsEntity>> {
+    override suspend fun getAllFavorites(limit: Int): ResponseStatus<List<FactsEntity>> {
         TODO("Not yet implemented")
     }
 
-    override suspend fun getFacts(limit:Int): ResponseStatus<List<FactsEntity>> {
-        return withContext(Dispatchers.IO){
+    override suspend fun getFacts(limit: Int): ResponseStatus<List<FactsEntity>> {
+        return withContext(Dispatchers.IO) {
             val getFavorite = async { getAllFacts(limit) }
             val getFactsResponse = getFavorite.await()
 
-            if(getFactsResponse is ResponseStatus.Success){
+            if (getFactsResponse is ResponseStatus.Success) {
                 ResponseStatus.Success(getFactsResponse.data)
-            }else{
+            } else {
                 ResponseStatus.Error((getFactsResponse as ResponseStatus.Error).messageId)
             }
         }
@@ -59,13 +60,35 @@ class MemoryLocalRepository @Inject constructor(private val localDS: LocalDS) :
         return localDS.getFavorite(limit)
     }
 
-    private suspend fun getAllFacts(limit: Int): ResponseStatus<List<FactsEntity>> = makeFirebaseCall {
-        val response = getResponseFacts(limit)
-        response
-    }
+    private suspend fun getAllFacts(limit: Int): ResponseStatus<List<FactsEntity>> =
+        makeFirebaseCall {
+            val response = getResponseFacts(limit)
+            response
+        }
 
-    private fun getResponseFacts(limit:Int): List<FactsEntity> {
+    private fun getResponseFacts(limit: Int): List<FactsEntity> {
         return localDS.getDataLocal(limit)
     }
 
+    override suspend fun updateData(factsEntity: FactsEntity): ResponseStatus<Int> {
+        return withContext(Dispatchers.IO) {
+            val updateDataR = async { updateDataRequest(factsEntity) }
+            val getUpdateResponse = updateDataR.await()
+
+            if (getUpdateResponse is ResponseStatus.Success) {
+                ResponseStatus.Success(getUpdateResponse.data)
+            } else {
+                ResponseStatus.Error((getUpdateResponse as ResponseStatus.Error).messageId)
+            }
+        }
+    }
+
+    private suspend fun updateDataRequest(factsEntity: FactsEntity): ResponseStatus<Int> =
+        makeFirebaseCall {
+            val response = getResponseDataUpdate(factsEntity)
+            response
+        }
+
+    private fun getResponseDataUpdate(factsEntity: FactsEntity): Int =
+        localDS.updateData(factsEntity)
 }

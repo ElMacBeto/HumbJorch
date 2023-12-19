@@ -16,7 +16,7 @@ interface FactsDAO {
     fun getAllData(limit:Int): List<FactsEntity>
 
     @Update
-    fun updateData(clients: FactsEntity): Int
+    fun updateData(factsEntity: FactsEntity): Int
 
     @Query("SELECT COUNT(*) FROM FACTS")
      fun getCount(): Int
@@ -26,4 +26,7 @@ interface FactsDAO {
 
     @Query("SELECT * FROM FACTS WHERE isFavorite = :isFavorite LIMIT :limit, 10")
     fun getFavorite(isFavorite: Boolean, limit:Int): List<FactsEntity>
+    @Query("DELETE from FACTS")
+    fun deleteTable():Int
+
 }

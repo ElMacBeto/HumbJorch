@@ -12,7 +12,6 @@ import javax.inject.Singleton
 
 @Singleton
 class LocalDS @Inject constructor(private val factsDAO: FactsDAO) {
-
     fun insertEntity(factsEntity: FactsEntity) {
         CoroutineScope(Dispatchers.IO).launch {
             factsDAO.insertData(factsEntity)
@@ -24,5 +23,11 @@ class LocalDS @Inject constructor(private val factsDAO: FactsDAO) {
     fun getCount(): Int = factsDAO.getCount()
 
     fun getFavorite(limit: Int): List<FactsEntity> = factsDAO.getFavorite(true, limit)
+
+    fun updateData(factsEntity: FactsEntity) =
+        factsDAO.updateData(factsEntity)
+
+    fun delete() = factsDAO.deleteTable()
+
 
 }

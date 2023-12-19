@@ -1,14 +1,23 @@
 package com.humbjorch.myapplication.ui.home
 
+import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
 import com.humbjorch.myapplication.R
+import com.humbjorch.myapplication.sis.utils.alerts.GenericDialog
 import com.humbjorch.myapplication.sis.utils.alerts.LoaderNBEXWidget
+import com.humbjorch.myapplication.ui.login.LoginActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(){
+    companion object{
+        var CHANGE_HOME_LIST = false
+    }
+
     private val loader by lazy { LoaderNBEXWidget() }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +40,47 @@ class MainActivity : AppCompatActivity(){
         } catch (e: Exception) {
             //ERROR
         }
+    }
+    fun genericAlert(
+        imageAlert: Int = R.drawable.generic_icon_warning,
+        titleAlert: String,
+        descriptionAlert: String,
+        txtBtnPositiveAlert: String,
+        txtBtnNegativeAlert: String,
+        isCancelableAlert: Boolean = false,
+        buttonPositiveAction: (() -> Unit)? = null,
+        buttonNegativeAction: (() -> Unit)? = null,
+    ) {
+        lifecycleScope.launchWhenResumed {
+            GenericDialog().apply {
+                imgDialog = imageAlert
+                txtConfirm = txtBtnPositiveAlert
+                txtCancel = txtBtnNegativeAlert
+                txtTitle = titleAlert
+                txtMessageAlert = descriptionAlert
+                isCancelable = isCancelableAlert
+                listener = object : GenericDialog.OnClickListener {
+                    override fun onClick(which: Int) {
+                        when (which) {
+                            DialogInterface.BUTTON_POSITIVE -> {
+                                buttonPositiveAction?.invoke()
+                            }
+
+                            else -> {
+                                buttonNegativeAction?.invoke()
+                            }
+                        }
+                    }
+                }
+                this.show(supportFragmentManager, System.currentTimeMillis().toString())
+            }
+        }
+    }
+
+    fun goToLogin() {
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
     fun dismissLoader() {

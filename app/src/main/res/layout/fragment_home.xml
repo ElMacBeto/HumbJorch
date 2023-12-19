@@ -21,6 +21,9 @@
             android:layout_marginTop="@dimen/dp80"
             app:cardCornerRadius="100dp"
             app:cardElevation="8dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="@drawable/foreground_grey"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">

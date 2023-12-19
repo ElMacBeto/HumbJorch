@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="fact"
             type="com.humbjorch.myapplication.data.model.FactsEntity" />
@@ -23,7 +24,6 @@
             android:layout_marginTop="@dimen/dp80"
             android:layout_marginEnd="@dimen/dp16"
             android:layout_marginBottom="@dimen/dp50"
-            app:cardBackgroundColor="#EDFFFFFF"
             app:cardCornerRadius="@dimen/dp8"
             app:cardElevation="4dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -35,20 +35,187 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="@dimen/dp16">
-                <TextView
-                    android:id="@+id/tv_slug"
-                    android:layout_width="0dp"
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/containerShare"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textAllCaps="true"
-                    tools:text="INMUJERES"
-                    android:text="@{fact.slug}"
-                    android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/sp20"
-                    app:layout_constraintTop_toTopOf="parent"
+                    android:background="@color/white"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/img_favorite"/>
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_margin="@dimen/dp16">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/btn_image"
+                        android:layout_width="@dimen/dp50"
+                        android:layout_height="@dimen/dp50"
+                        app:cardCornerRadius="100dp"
+                        app:cardElevation="8dp"
+                        android:layout_margin="@dimen/dp16"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/imgPhotoProfile"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:contentDescription="@string/todo"
+                            android:src="@drawable/ic_add_photo" />
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_email"
+                        android:layout_width="@dimen/dp0"
+                        android:layout_height="@dimen/dp0"
+                        app:layout_constraintStart_toEndOf="@id/btn_image"
+                        app:layout_constraintTop_toTopOf="@id/btn_image"
+                        app:layout_constraintBottom_toBottomOf="@id/btn_image"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_margin="@dimen/dp8"
+                        android:text="Jorge@gmail.com.mx"
+                        android:gravity="center_vertical"
+                        app:fontFamily="@font/roboto_medium"/>
+
+                    <View
+                        android:id="@+id/divider"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/colorGray4"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/btn_image"
+                        android:layout_marginTop="@dimen/dp20"
+                        android:layout_marginStart="@dimen/dp16"
+                        android:layout_marginEnd="@dimen/dp16"/>
+
+                    <TextView
+                        android:id="@+id/tv_slug"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textAllCaps="true"
+                        tools:text="INMUJERES"
+                        android:text="@{fact.slug}"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/sp20"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/divider"
+                        android:layout_marginTop="@dimen/dp8"/>
+
+                    <TextView
+                        android:id="@+id/tv_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:text="15 es el numero de bases de datos que la dependencia CDI ha publicado"
+                        android:text="@{fact.organization}"
+                        android:textSize="@dimen/sp16"
+                        android:textColor="@color/black"
+                        android:layout_marginTop="@dimen/dp35"
+                        android:layout_marginStart="@dimen/dp8"
+                        android:layout_marginEnd="@dimen/dp8"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_slug"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+
+                    <ImageView
+                        android:id="@+id/img_number"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_number"
+                        android:layout_marginTop="@dimen/dp16"
+                        android:layout_marginStart="@dimen/dp8"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_description"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_database"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp16"
+                        tools:text="Numero de bases de datos"
+                        android:text="@{fact.dataset}"
+                        android:layout_marginEnd="@dimen/dp8"
+                        android:layout_marginStart="@dimen/dp16"
+                        app:layout_constraintTop_toTopOf="@+id/img_number"
+                        app:layout_constraintBottom_toBottomOf="@+id/img_number"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/img_number"/>
+
+                    <TextView
+                        android:id="@+id/tv_rutine"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp16"
+                        android:layout_marginTop="@dimen/dp16"
+                        android:text="@{fact.slug}"
+                        android:layout_marginStart="@dimen/dp8"
+                        android:layout_marginEnd="@dimen/dp8"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_database"
+                        tools:text="Rutina de R"/>
+
+                    <TextView
+                        android:id="@+id/tv_id"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp16"
+                        android:text="@{fact.id_api}"
+                        android:layout_marginTop="@dimen/dp16"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_rutine"
+                        tools:text="R213123123132k 31sj"
+                        android:layout_marginStart="@dimen/dp8"
+                        android:layout_marginEnd="@dimen/dp8"/>
+
+                    <TextView
+                        android:id="@+id/tv_link"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp16"
+                        android:layout_marginTop="@dimen/dp16"
+                        android:text="@{fact.url}"
+                        android:layout_marginEnd="@dimen/dp8"
+                        android:layout_marginStart="@dimen/dp8"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_id"
+                        tools:text="https://www.figma.com/file"/>
+
+                    <TextView
+                        android:id="@+id/tv_lat"
+                        app:fontFamily="@font/roboto"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorBlue11"
+                        android:layout_marginTop="@dimen/dp16"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_link"
+                        tools:text="Latitud: 749375934750934"
+                        android:layout_marginEnd="@dimen/dp8"
+                        android:layout_marginBottom="@dimen/dp16"/>
+
+                    <TextView
+                        android:id="@+id/tv_long"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorBlue11"
+                        android:layout_marginTop="@dimen/dp8"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_lat"
+                        tools:text="Longitud: 4845834983459"
+                        android:layout_marginEnd="@dimen/dp8"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_marginBottom="@dimen/dp16"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <ImageView
                     android:id="@+id/img_favorite"
@@ -57,98 +224,19 @@
                     android:src="@drawable/ic_favorite"
                     app:tint="@color/red1"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/tv_slug"
-                    app:layout_constraintBottom_toBottomOf="@+id/tv_slug"/>
+                    app:layout_constraintTop_toTopOf="parent"/>
 
-                <TextView
-                    android:id="@+id/tv_description"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    tools:text="15 es el numero de bases de datos que la dependencia CDI ha publicado"
-                    android:text="@{fact.organization}"
-                    android:textSize="@dimen/sp16"
-                    android:textColor="@color/black"
-                    android:layout_marginTop="@dimen/dp35"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_slug"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"/>
-
-                <ImageView
-                    android:id="@+id/img_number"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_number"
-                    android:layout_marginTop="@dimen/dp16"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_description"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <TextView
-                    android:id="@+id/tv_database"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/sp16"
-                    tools:text="Numero de bases de datos"
-                    android:text="@{fact.dataset}"
-                    android:layout_marginStart="@dimen/dp16"
-                    app:layout_constraintTop_toTopOf="@+id/img_number"
-                    app:layout_constraintBottom_toBottomOf="@+id/img_number"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/img_number"/>
-
-                <TextView
-                    android:id="@+id/tv_rutine"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/sp16"
-                    android:layout_marginTop="@dimen/dp16"
-                    android:text="@{fact.slug}"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_database"
-                    tools:text="Rutina de R"/>
-
-                <TextView
-                    android:id="@+id/tv_id"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/sp16"
-                    android:text="@{fact.id_api}"
-                    android:layout_marginTop="@dimen/dp16"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_rutine"
-                    tools:text="R213123123132k 31sj"/>
-
-                <TextView
-                    android:id="@+id/tv_link"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/sp16"
-                    android:layout_marginTop="@dimen/dp16"
-                    android:text="@{fact.url}"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_id"
-                    tools:text="https://www.figma.com/file"/>
                 <Button
                     style="@style/Button.General"
                     android:id="@+id/btn_share"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/label_share"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_link"
+                    android:layout_marginBottom="@dimen/dp16"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"/>
-
             </androidx.constraintlayout.widget.ConstraintLayout>
-
         </androidx.cardview.widget.CardView>
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </layout>
