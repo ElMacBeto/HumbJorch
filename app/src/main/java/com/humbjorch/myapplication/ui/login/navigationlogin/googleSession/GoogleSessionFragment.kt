@@ -69,8 +69,10 @@ class GoogleSessionFragment : Fragment() {
         binding.imgPhotoProfile.loadImageUrl(viewModel.getImageUrl())
 
         binding.btnGoggleSession.setOnClickListener {
-            val intent = viewModel.getClientProvide().signInIntent
-            responseLauncher.launch(intent)
+            (activity as LoginActivity).checkLocation {
+                val intent = viewModel.getClientProvide().signInIntent
+                responseLauncher.launch(intent)
+            }
         }
 
         setObserverLiveData()

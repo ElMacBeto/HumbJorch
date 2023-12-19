@@ -31,7 +31,7 @@ class HomeFragment : Fragment() {
     private var factList: List<FactsEntity> = listOf()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.getFavoritesFacts()
+        viewModel.getFavoritesFacts(0)
     }
     override fun onCreateView(
         inflater: LayoutInflater,

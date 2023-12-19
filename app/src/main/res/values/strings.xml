@@ -57,4 +57,9 @@
     <string name="custom_dialog_body">Are you sure you want to exit? Unsaved data will be lost. Confirm to exit.</string>
     <string name="label_share">share</string>
 
+    <string name="alert_geolocation_title">Geolocation Alert</string>
+    <string name="alert_geolocation_description">To use the application you must have GPS activated.</string>
+    <string name="alert_geolocation_positive_button">Activate</string>
+
+
 </resources>

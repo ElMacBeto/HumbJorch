@@ -68,7 +68,9 @@ class LoginTouchIdFragment : Fragment() {
             binding.root.findNavController().navigate(R.id.action_loginTouchIdFragment_to_loginPasswordFragment)
         }
         binding.btnTouchId.setOnClickListener {
-            showFingerPrint()
+            (activity as LoginActivity).checkLocation {
+                showFingerPrint()
+            }
         }
     }
 

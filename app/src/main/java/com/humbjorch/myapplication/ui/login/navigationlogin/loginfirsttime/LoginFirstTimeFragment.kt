@@ -82,24 +82,30 @@ class LoginFirstTimeFragment : Fragment() {
 
     private fun setListenerActions() {
         binding.btnRegister.setOnClickListener {
-            viewModel.createNewRegister(
-                binding.etEmail.text.toString(),
-                binding.etPass.text.toString(),
-                binding.swFingerprint.isChecked
-            )
+            (activity as LoginActivity).checkLocation {
+                viewModel.createNewRegister(
+                    binding.etEmail.text.toString(),
+                    binding.etPass.text.toString(),
+                    binding.swFingerprint.isChecked
+                )
+            }
         }
 
         binding.btnLogin.setOnClickListener {
-            viewModel.loginAccount(
-                binding.etEmail.text.toString(),
-                binding.etPass.text.toString(),
-                binding.swFingerprint.isChecked
-            )
+            (activity as LoginActivity).checkLocation {
+                viewModel.loginAccount(
+                    binding.etEmail.text.toString(),
+                    binding.etPass.text.toString(),
+                    binding.swFingerprint.isChecked
+                )
+            }
         }
 
         binding.containerGoogleLogin.setOnClickListener {
-            val intent = viewModel.getClientProvide().signInIntent
-            responseLauncher.launch(intent)
+            (activity as LoginActivity).checkLocation {
+                val intent = viewModel.getClientProvide().signInIntent
+                responseLauncher.launch(intent)
+            }
         }
 
         binding.swFingerprint.setOnCheckedChangeListener { _, isChecked ->

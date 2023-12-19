@@ -33,7 +33,7 @@ class AllListFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            isFavoriteView = it.getBoolean("fact")
+            isFavoriteView = it.getBoolean("isVavoriteView")
         }
     }
 
@@ -57,7 +57,7 @@ class AllListFragment : Fragment() {
         if (factList.isNotEmpty())
             return
         if (isFavoriteView)
-            viewModel.getFavoritesFacts()
+            viewModel.getFavoritesFacts(0)
         else
             viewModel.getAllFacts(0)
     }

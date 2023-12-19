@@ -17,14 +17,16 @@ class HomeViewModel @Inject constructor(private val repository: MemoryLocalRepos
     ViewModel() {
 
     private var _getFavoriteFactsLiveData = MutableLiveData<ResponseStatus<Any>>()
+
+
     val getFavoriteFactsLiveData: LiveData<ResponseStatus<Any>> get() = _getFavoriteFactsLiveData
 
 
 
-    fun getFavoritesFacts() {
+    fun getFavoritesFacts(limit:Int) {
         _getFavoriteFactsLiveData.value = ResponseStatus.Loading()
         viewModelScope.launch {
-            handelServiceResponseStatus(repository.getFavorites())
+            handelServiceResponseStatus(repository.getFavorites(limit))
         }
     }
 

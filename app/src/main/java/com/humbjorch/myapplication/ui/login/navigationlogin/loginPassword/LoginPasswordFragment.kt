@@ -68,10 +68,12 @@ class LoginPasswordFragment : Fragment() {
         setWatchers()
         setObserverLiveData()
         binding.btnLogin.setOnClickListener {
-            viewModel.loginAccount(
-                binding.etPass.text.toString(),
-                binding.swFingerprint.isChecked
-            )
+            (activity as LoginActivity).checkLocation {
+                viewModel.loginAccount(
+                    binding.etPass.text.toString(),
+                    binding.swFingerprint.isChecked
+                )
+            }
         }
     }
 

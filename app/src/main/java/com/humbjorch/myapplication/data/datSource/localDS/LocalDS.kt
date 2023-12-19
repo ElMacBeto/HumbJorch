@@ -12,17 +12,17 @@ import javax.inject.Singleton
 
 @Singleton
 class LocalDS @Inject constructor(private val factsDAO: FactsDAO) {
+
     fun insertEntity(factsEntity: FactsEntity) {
         CoroutineScope(Dispatchers.IO).launch {
             factsDAO.insertData(factsEntity)
         }
     }
 
-    fun getDataLocal(limit:Int): List<FactsEntity> = factsDAO.getAllData(limit)
+    fun getDataLocal(limit: Int): List<FactsEntity> = factsDAO.getAllData(limit)
 
     fun getCount(): Int = factsDAO.getCount()
 
-
-    fun getFavorite(): List<FactsEntity> = factsDAO.getFavorite(true)
+    fun getFavorite(limit: Int): List<FactsEntity> = factsDAO.getFavorite(true, limit)
 
 }
