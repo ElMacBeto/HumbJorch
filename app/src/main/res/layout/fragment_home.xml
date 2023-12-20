@@ -120,18 +120,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"/>
 
-                <TextView
-                    android:id="@+id/all_favorite"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/label_show_all"
-                    android:textColor="@color/blue2"
-                    android:textSize="@dimen/sp14"
-                    app:fontFamily="@font/roboto"
-                    app:layout_constraintBottom_toBottomOf="@+id/tv_favorites"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/tv_favorites" />
-
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_facts"
                     android:layout_width="0dp"

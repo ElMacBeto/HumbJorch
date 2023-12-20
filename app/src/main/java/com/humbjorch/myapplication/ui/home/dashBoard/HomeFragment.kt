@@ -53,7 +53,7 @@ class HomeFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.getFavoritesFacts(0)
+        viewModel.getFavoritesFacts()
     }
 
     override fun onCreateView(
@@ -77,12 +77,7 @@ class HomeFragment : Fragment() {
 
     private fun setListenerActions() {
         binding.btnAllPost.setOnClickListener {
-            val action = HomeFragmentDirections.actionNavigationHomeToAllListFragment(false)
-            binding.root.findNavController().navigate(action)
-        }
-
-        binding.allFavorite.setOnClickListener {
-            val action = HomeFragmentDirections.actionNavigationHomeToAllListFragment(true)
+            val action = HomeFragmentDirections.actionNavigationHomeToAllListFragment()
             binding.root.findNavController().navigate(action)
         }
 

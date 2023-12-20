@@ -100,8 +100,8 @@ class DetailFragment : Fragment() {
         binding.tvEmail.text = viewModel.getEmail()
         binding.imgFavorite.setImageResource(fact!!.isFavorite.getDrawableFavorite())
         // TODO: latitudeLongitudeFormat
-        binding.tvLat.latitudeLongitudeFormat("Latitude", "768768768687")
-        binding.tvLong.latitudeLongitudeFormat("Longitude", "029483976893")
+        binding.tvLat.latitudeLongitudeFormat("Latitude", viewModel.getLatitude())
+        binding.tvLong.latitudeLongitudeFormat("Longitude", viewModel.getLongitude())
     }
     private fun takeScreenshot(): Bitmap {
         val bitmap = Bitmap.createBitmap(

@@ -36,10 +36,10 @@ class HomeViewModel @Inject constructor(
 
     }
 
-    fun getFavoritesFacts(limit:Int) {
+    fun getFavoritesFacts() {
         _getFavoriteFactsLiveData.value = ResponseStatus.Loading()
         viewModelScope.launch {
-            handelServiceResponseStatus(repository.getFavorites(limit))
+            handelServiceResponseStatus(repository.getFavorites())
         }
     }
 

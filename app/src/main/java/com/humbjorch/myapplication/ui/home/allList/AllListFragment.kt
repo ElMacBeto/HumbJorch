@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,8 +17,6 @@ import com.humbjorch.myapplication.sis.utils.alerts.TypeToast
 import com.humbjorch.myapplication.ui.home.HomeViewModel
 import com.humbjorch.myapplication.ui.home.MainActivity
 import com.humbjorch.myapplication.ui.home.dashBoard.adapter.FactsAdapter
-import com.humbjorch.myapplication.ui.home.detail.DetailFragment
-import com.humbjorch.myapplication.ui.home.detail.FACT
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -29,15 +26,8 @@ class AllListFragment : Fragment() {
     private lateinit var binding: FragmentAllListBinding
     private lateinit var factAdapter: FactsAdapter
     private var factList: List<FactsEntity> = listOf()
-    private var isFavoriteView: Boolean = false
     private var stopPagination: Boolean = true
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            isFavoriteView = it.getBoolean("isVavoriteView")
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -58,10 +48,7 @@ class AllListFragment : Fragment() {
     private fun getFactList() {
         if (factList.isNotEmpty())
             return
-        if (isFavoriteView)
-            viewModel.getFavoritesFacts(0)
-        else
-            viewModel.getAllFacts(0)
+        viewModel.getAllFacts(0)
     }
 
     private fun setObservers() {
@@ -82,7 +69,7 @@ class AllListFragment : Fragment() {
                     }
                     binding.root.postDelayed({
                         (activity as MainActivity).dismissLoader()
-                    }, 3000)
+                    }, 1000)
                 }
 
                 is ResponseStatus.Error -> {

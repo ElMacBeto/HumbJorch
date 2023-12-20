@@ -11,7 +11,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
 
 interface DataBaseConnectionTask {
-    suspend fun getFavorites(limit:Int): ResponseStatus<List<FactsEntity>>
+    suspend fun getFavorites(): ResponseStatus<List<FactsEntity>>
 
     suspend fun getAllFavorites(limit: Int): ResponseStatus<List<FactsEntity>>
     suspend fun getFacts(limit: Int): ResponseStatus<List<FactsEntity>>
@@ -21,9 +21,9 @@ interface DataBaseConnectionTask {
 @Singleton
 class MemoryLocalRepository @Inject constructor(private val localDS: LocalDS) :
     DataBaseConnectionTask {
-    override suspend fun getFavorites(limit:Int): ResponseStatus<List<FactsEntity>> {
+    override suspend fun getFavorites(): ResponseStatus<List<FactsEntity>> {
         return withContext(Dispatchers.IO){
-            val getFavorite = async { getFavorite(limit) }
+            val getFavorite = async { getFavorite() }
             val getFavoriteResponse = getFavorite.await()
 
             if (getFavoriteResponse is ResponseStatus.Success) {
@@ -51,13 +51,13 @@ class MemoryLocalRepository @Inject constructor(private val localDS: LocalDS) :
         }
     }
 
-    private suspend fun getFavorite(limit:Int): ResponseStatus<List<FactsEntity>> = makeFirebaseCall {
-        val response = getResponseData(limit)
+    private suspend fun getFavorite(): ResponseStatus<List<FactsEntity>> = makeFirebaseCall {
+        val response = getResponseData()
         response
     }
 
-    private fun getResponseData(limit:Int): List<FactsEntity> {
-        return localDS.getFavorite(limit)
+    private fun getResponseData(): List<FactsEntity> {
+        return localDS.getFavorite()
     }
 
     private suspend fun getAllFacts(limit: Int): ResponseStatus<List<FactsEntity>> =

@@ -21,12 +21,7 @@
         </action>
         <action
             android:id="@+id/action_navigation_home_to_allListFragment"
-            app:destination="@id/allListFragment" >
-            <argument
-                android:name="isVavoriteView"
-                app:argType="boolean"
-                app:nullable="false" />
-        </action>
+            app:destination="@id/allListFragment"/>
     </fragment>
     <fragment
         android:id="@+id/detailFragment"

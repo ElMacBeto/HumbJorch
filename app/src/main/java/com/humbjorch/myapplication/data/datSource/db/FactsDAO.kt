@@ -24,8 +24,9 @@ interface FactsDAO {
     @Query("select max(id) from FACTS")
     fun getMaxId(): Int
 
-    @Query("SELECT * FROM FACTS WHERE isFavorite = :isFavorite LIMIT :limit, 10")
-    fun getFavorite(isFavorite: Boolean, limit:Int): List<FactsEntity>
+    @Query("SELECT * FROM FACTS WHERE isFavorite = :isFavorite")
+    fun getFavorite(isFavorite: Boolean): List<FactsEntity>
+
     @Query("DELETE from FACTS")
     fun deleteTable():Int
 
