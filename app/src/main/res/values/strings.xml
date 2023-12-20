@@ -64,7 +64,10 @@
 
     <string name="alert_geolocation_title">Geolocation Alert</string>
     <string name="alert_geolocation_description">To use the application you must have GPS activated.</string>
-    <string name="alert_geolocation_positive_button">Activate</string>
+    <string name="alert_geolocation_positive_button">To proceed, please activate the GPS. Thank you.</string>
+    <string name="latitude">Latitude: </string>
+    <string name="longitude">Longitude: </string>
+    <string name="label_permission_success">Permission granted successfully. Feel free to proceed. Thank you</string>
 
 
 </resources>

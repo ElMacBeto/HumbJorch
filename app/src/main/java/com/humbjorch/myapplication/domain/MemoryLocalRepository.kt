@@ -5,10 +5,10 @@ import com.humbjorch.myapplication.data.datSource.localDS.LocalDS
 import com.humbjorch.myapplication.data.datSource.makeFirebaseCall
 import com.humbjorch.myapplication.data.model.FactsEntity
 import kotlinx.coroutines.Dispatchers
-import javax.inject.Inject
-import javax.inject.Singleton
 import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
+import javax.inject.Singleton
 
 interface DataBaseConnectionTask {
     suspend fun getFavorites(): ResponseStatus<List<FactsEntity>>

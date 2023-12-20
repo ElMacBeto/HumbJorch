@@ -6,7 +6,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.humbjorch.myapplication.data.datSource.ResponseStatus
-import com.humbjorch.myapplication.data.datSource.db.FactsDAO
 import com.humbjorch.myapplication.data.datSource.localDS.LocalDS
 import com.humbjorch.myapplication.data.model.FactsEntity
 import com.humbjorch.myapplication.data.model.FactsModel
@@ -17,7 +16,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel

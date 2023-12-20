@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,16 +20,14 @@ import com.humbjorch.myapplication.sis.utils.loadImageUrl
 import com.humbjorch.myapplication.ui.home.HomeViewModel
 import com.humbjorch.myapplication.ui.home.MainActivity
 import com.humbjorch.myapplication.ui.home.MainActivity.Companion.CHANGE_HOME_LIST
-import com.humbjorch.myapplication.ui.home.allList.AllListFragmentDirections
 import com.humbjorch.myapplication.ui.home.dashBoard.adapter.FactsAdapter
-import com.humbjorch.myapplication.ui.login.LoginActivity
 import com.humbjorch.myapplication.ui.login.LoginSessionViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
 
-    private val viewModel: HomeViewModel by viewModels()
+    private val viewModel: HomeViewModel by activityViewModels()
     private val sessionViewModel: LoginSessionViewModel by viewModels()
     private lateinit var binding: FragmentHomeBinding
     private lateinit var factAdapter: FactsAdapter
@@ -166,8 +165,10 @@ class HomeFragment : Fragment() {
         factAdapter = FactsAdapter(
             dataSet = factList,
             onClick = { fact ->
-                val action = HomeFragmentDirections.actionNavigationHomeToDetailFragment(fact)
-                binding.root.findNavController().navigate(action)
+                (activity as MainActivity).checkLocation(action = {
+                    val action = HomeFragmentDirections.actionNavigationHomeToDetailFragment(fact)
+                    binding.root.findNavController().navigate(action)
+                }, checkConnection = viewModel.checkLocation())
             }
         )
         binding.rvFacts.apply {

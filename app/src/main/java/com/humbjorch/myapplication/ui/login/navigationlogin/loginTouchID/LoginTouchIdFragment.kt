@@ -2,17 +2,15 @@ package com.humbjorch.myapplication.ui.login.navigationlogin.loginTouchID
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import com.humbjorch.myapplication.R
 import com.humbjorch.myapplication.databinding.FragmentLoginTouchIdBinding
-import com.humbjorch.myapplication.databinding.FragmentSplashLoginBinding
 import com.humbjorch.myapplication.sis.utils.BiometricsUtils
 import com.humbjorch.myapplication.sis.utils.alerts.CustomToastWidget
 import com.humbjorch.myapplication.sis.utils.alerts.TypeToast
@@ -20,7 +18,6 @@ import com.humbjorch.myapplication.sis.utils.loadImageUrl
 import com.humbjorch.myapplication.ui.home.MainActivity
 import com.humbjorch.myapplication.ui.login.LoginActivity
 import com.humbjorch.myapplication.ui.login.LoginSessionViewModel
-import com.humbjorch.myapplication.ui.login.navigationlogin.splash.SplashViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 

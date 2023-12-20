@@ -1,12 +1,12 @@
 package com.humbjorch.myapplication.ui.home.allList
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.humbjorch.myapplication.data.datSource.ResponseStatus
@@ -22,7 +22,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class AllListFragment : Fragment() {
 
-    private val viewModel: HomeViewModel by viewModels()
+    private val viewModel: HomeViewModel by activityViewModels()
     private lateinit var binding: FragmentAllListBinding
     private lateinit var factAdapter: FactsAdapter
     private var factList: List<FactsEntity> = listOf()
@@ -90,8 +90,11 @@ class AllListFragment : Fragment() {
         factAdapter = FactsAdapter(
             dataSet = factList,
             onClick = { fact ->
-                val action = AllListFragmentDirections.actionAllListFragmentToDetailFragment(fact)
-                binding.root.findNavController().navigate(action)
+                (activity as MainActivity).checkLocation(action = {
+                    val action =
+                        AllListFragmentDirections.actionAllListFragmentToDetailFragment(fact)
+                    binding.root.findNavController().navigate(action)
+                }, checkConnection = viewModel.checkLocation())
             }
         )
 

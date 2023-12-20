@@ -1,22 +1,23 @@
 package com.humbjorch.myapplication.sis.utils
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.content.DialogInterface
+import android.content.Context
+import android.content.pm.PackageManager
 import android.os.Build
 import android.text.SpannableStringBuilder
 import android.view.View
 import android.widget.TextView
 import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat
 import androidx.core.text.bold
 import androidx.core.text.color
-import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.humbjorch.myapplication.App
 import com.humbjorch.myapplication.R
-import com.humbjorch.myapplication.sis.utils.alerts.CustomToastWidget
 import com.humbjorch.myapplication.sis.utils.timer.CheckConnection
 import com.humbjorch.myapplication.sis.utils.util.Constants.PHOTO_AUTHENTICATION_DEFAULT
 import com.humbjorch.myapplication.sis.utils.util.SafeClickListener
@@ -102,4 +103,14 @@ fun TextView.latitudeLongitudeFormat(type: String, value: String) {
     this.text = SpannableStringBuilder()
         .bold { color(App.instance.getColor(R.color.black)) { append("$type: ") } }
         .color(App.instance.getColor(R.color.colorBlue11)) { append(value) }
+}
+
+fun Context.isPermissionGranted(): Boolean {
+    return ContextCompat.checkSelfPermission(
+        this,
+        Manifest.permission.ACCESS_FINE_LOCATION
+    ) == PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(
+    this,
+    Manifest.permission.ACCESS_COARSE_LOCATION
+    ) == PackageManager.PERMISSION_GRANTED
 }

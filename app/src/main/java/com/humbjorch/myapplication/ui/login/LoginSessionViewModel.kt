@@ -8,10 +8,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.humbjorch.myapplication.data.datSource.ResponseStatus
 import com.humbjorch.myapplication.data.local.AuthenticationResponse
-import com.humbjorch.myapplication.data.model.LocationModel
 import com.humbjorch.myapplication.domain.NewAuthenticationRepository
 import com.humbjorch.myapplication.sis.di.ModuleSharePreference
-import com.humbjorch.myapplication.sis.utils.HelperGeolocation
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -19,19 +17,9 @@ import javax.inject.Inject
 @HiltViewModel
 class LoginSessionViewModel @Inject constructor(
     private val moduleSharePreference: ModuleSharePreference,
-    private val authenticationRepository: NewAuthenticationRepository,
-    private val helperGeolocation: HelperGeolocation
+    private val authenticationRepository: NewAuthenticationRepository
 ) :
     ViewModel() {
-
-    private var location:LocationModel? = null
-
-    init {
-        viewModelScope.launch {
-            location = helperGeolocation.getLocation()
-        }
-    }
-
     fun getEmail() = moduleSharePreference.getEmail()
     fun getImageUrl() = moduleSharePreference.getPhoto()
     fun getTouchId() = moduleSharePreference.getTouchId()
@@ -97,12 +85,4 @@ class LoginSessionViewModel @Inject constructor(
     private fun handelFirebaseResponseStatus(apiResponseStatus: ResponseStatus<AuthenticationResponse>) {
         _createRegister.value = apiResponseStatus as ResponseStatus<Any>
     }
-
-    fun getLatitude():String{
-        return location!!.latitude.toString()
-    }
-    fun getLongitude():String{
-        return location!!.longitude.toString()
-    }
-
 }

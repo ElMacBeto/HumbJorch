@@ -4,87 +4,63 @@ import android.Manifest
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.os.Build
 import android.os.Bundle
-import androidx.activity.result.contract.ActivityResultContracts
+import android.provider.Settings
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
 import com.humbjorch.myapplication.R
 import com.humbjorch.myapplication.sis.utils.HelperGeolocation
+import com.humbjorch.myapplication.sis.utils.alerts.CustomToastWidget
 import com.humbjorch.myapplication.sis.utils.alerts.GenericDialog
 import com.humbjorch.myapplication.sis.utils.alerts.LoaderNBEXWidget
+import com.humbjorch.myapplication.sis.utils.alerts.TypeToast
+import com.humbjorch.myapplication.sis.utils.isPermissionGranted
 import com.humbjorch.myapplication.sis.utils.launchTimer
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
-import androidx.core.content.ContextCompat.checkSelfPermission
-import android.provider.Settings
 
+const val REQUEST_CODE = 100
 @AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
     private val loader by lazy { LoaderNBEXWidget() }
     var START_DESTINATION_PASSWORD = false
-    var hasPermission = false
+    //var hasPermission = false
+
+    private val permissionList =
+        arrayOf(
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION
+        )
 
     @Inject
     lateinit var helperGeolocation: HelperGeolocation
-
-    private val requestMultiplePermissions =
-        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { result ->
-            hasPermission = true
-            for (granted in result.values) {
-                if (!granted) {
-                    hasPermission = false
-                    break
-                }
-            }
-            if (hasPermission && !helperGeolocation.isEnableGeolocation()){
-                startActivity(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS))
-            }
-        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         supportFragmentManager.findFragmentById(R.id.fragmentContainerHome) as NavHostFragment
-        setPermissions()
         this.launchTimer()
+
+        if (!isPermissionGranted()) {
+            requestPermission()
+        }
     }
 
-    private fun setPermissions() {
-        var permissions = arrayOf<String>()
-
-        if (checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                permissions = permissions.plus(Manifest.permission.ACCESS_FINE_LOCATION)
-            }
-        }
-        if (checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                permissions = permissions.plus(Manifest.permission.ACCESS_COARSE_LOCATION)
-            }
-        }
-
-        if (permissions.isNotEmpty()) {
-            requestMultiplePermissions.launch(permissions)
-        } else {
-            hasPermission = true
-        }
+    private fun requestPermission() {
+        ActivityCompat.requestPermissions(
+            this,
+            permissionList,
+            REQUEST_CODE
+        )
     }
 
     fun checkLocation(action: () -> Unit) {
-        if (hasPermission) {
+        if (isPermissionGranted()) {
             if (helperGeolocation.isEnableGeolocation()) {
                 action()
-            }else{
+            } else {
                 genericAlert(
                     titleAlert = getString(R.string.alert_geolocation_title),
                     descriptionAlert = getString(R.string.alert_geolocation_positive_button),
@@ -99,7 +75,7 @@ class LoginActivity : AppCompatActivity() {
                 )
             }
         } else {
-            setPermissions()
+            requestPermission()
         }
     }
 
@@ -162,6 +138,31 @@ class LoginActivity : AppCompatActivity() {
                     }
                 }
                 this.show(supportFragmentManager, System.currentTimeMillis().toString())
+            }
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when (requestCode) {
+            REQUEST_CODE -> {
+                if (grantResults.isNotEmpty()) {
+                    val locationOneAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED
+                    val locationTwoAccepted = grantResults[1] == PackageManager.PERMISSION_GRANTED
+                    if (locationOneAccepted || locationTwoAccepted) {
+                        CustomToastWidget.show(
+                            activity = this,
+                            message = getString(R.string.label_permission_success),
+                            type = TypeToast.SUCCESS
+                        )
+                    } else {
+                        finish()
+                    }
+                }
             }
         }
     }

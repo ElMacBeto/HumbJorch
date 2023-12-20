@@ -1,8 +1,5 @@
 package com.humbjorch.myapplication.sis.utils
 
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.flow
-
 class Resource<T>(
     val status: Status,
     val data: T? = null,

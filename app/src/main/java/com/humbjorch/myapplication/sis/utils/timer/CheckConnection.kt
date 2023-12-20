@@ -4,11 +4,10 @@ import android.app.Activity
 import com.humbjorch.myapplication.R
 import com.humbjorch.myapplication.sis.utils.alerts.ShowDialog
 import com.humbjorch.myapplication.sis.utils.alerts.TypeToast
-import com.humbjorch.myapplication.sis.utils.timer.NetworkUtils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.util.*
+import java.util.TimerTask
 
 
 class CheckConnection constructor(private val context: Activity) : TimerTask() {

@@ -13,8 +13,8 @@ import com.humbjorch.myapplication.ui.login.LoginActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity(){
-    companion object{
+class MainActivity : AppCompatActivity() {
+    companion object {
         var CHANGE_HOME_LIST = false
     }
 
@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         supportFragmentManager.findFragmentById(R.id.fragmentContainer) as NavHostFragment
+
     }
 
     fun showLoader() {
@@ -41,6 +42,7 @@ class MainActivity : AppCompatActivity(){
             //ERROR
         }
     }
+
     fun genericAlert(
         imageAlert: Int = R.drawable.generic_icon_warning,
         titleAlert: String,
@@ -90,6 +92,25 @@ class MainActivity : AppCompatActivity(){
             } else {
                 loader.dismissAllowingStateLoss()
             }
+        }
+    }
+
+    fun checkLocation(action: () -> Unit, checkConnection: Boolean) {
+        if (checkConnection) {
+            action()
+        } else {
+            genericAlert(
+                titleAlert = getString(R.string.alert_geolocation_title),
+                descriptionAlert = getString(R.string.alert_geolocation_positive_button),
+                txtBtnNegativeAlert = getString(R.string.cancel_dialog),
+                txtBtnPositiveAlert = getString(R.string.dialog_confirm),
+                buttonPositiveAction = {
+                    startActivity(Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS))
+                },
+                buttonNegativeAction = {
+
+                }
+            )
         }
     }
 }
