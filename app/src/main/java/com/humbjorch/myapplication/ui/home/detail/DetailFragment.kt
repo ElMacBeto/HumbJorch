@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.humbjorch.myapplication.R
 import com.humbjorch.myapplication.data.datSource.ResponseStatus
@@ -31,7 +30,7 @@ class DetailFragment : Fragment() {
     private lateinit var binding: FragmentDetailBinding
     private var fact: FactsEntity? = null
     private val viewModel: LoginSessionViewModel by viewModels()
-    private val viewModelHome: HomeViewModel by activityViewModels()
+    private val viewModelHome: HomeViewModel by viewModels()
     private var isChecked = false
 
 
@@ -67,8 +66,6 @@ class DetailFragment : Fragment() {
         setVies()
         setListenerActions()
         setObservers()
-        viewModelHome.getLatitude()
-        viewModelHome.getLongitude()
     }
 
     private fun setObservers() {
@@ -97,19 +94,15 @@ class DetailFragment : Fragment() {
                 }
             }
         }
-
-        viewModelHome.getLatitudeLiveData.observe(viewLifecycleOwner){
-            binding.tvLat.latitudeLongitudeFormat(getString(R.string.latitude), it)
-        }
-        viewModelHome.getLongitudeLiveData.observe(viewLifecycleOwner){
-            binding.tvLong.latitudeLongitudeFormat(getString(R.string.longitude), it)
-        }
     }
 
     private fun setVies() {
         binding.imgPhotoProfile.loadImageUrl(viewModel.getImageUrl())
         binding.tvEmail.text = viewModel.getEmail()
         binding.imgFavorite.setImageResource(fact!!.isFavorite.getDrawableFavorite())
+
+        binding.tvLat.latitudeLongitudeFormat(getString(R.string.latitude), viewModelHome.getLatitude())
+        binding.tvLong.latitudeLongitudeFormat(getString(R.string.longitude), viewModelHome.getLongitude())
     }
     private fun takeScreenshot(): Bitmap {
         val bitmap = Bitmap.createBitmap(

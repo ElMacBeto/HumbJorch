@@ -1,21 +1,17 @@
 package com.humbjorch.myapplication.ui.home
 
 import android.annotation.SuppressLint
-import android.location.Location
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.google.android.gms.location.LocationServices
 import com.humbjorch.myapplication.data.datSource.ResponseStatus
 import com.humbjorch.myapplication.data.model.FactsEntity
-import com.humbjorch.myapplication.data.model.LocationModel
 import com.humbjorch.myapplication.domain.MemoryLocalRepository
 import com.humbjorch.myapplication.domain.NewAuthenticationRepository
+import com.humbjorch.myapplication.sis.di.ModuleSharePreference
 import com.humbjorch.myapplication.sis.utils.HelperGeolocation
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -23,7 +19,8 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val repository: MemoryLocalRepository,
     private val newAuthenticationRepository: NewAuthenticationRepository,
-    private val helperGeolocation: HelperGeolocation
+    private val helperGeolocation: HelperGeolocation,
+    private val sharePreference: ModuleSharePreference
 ) :
     ViewModel() {
 
@@ -36,20 +33,20 @@ class HomeViewModel @Inject constructor(
     private var _singOutLiveData = MutableLiveData<ResponseStatus<Any>>()
     val singOutLiveData: LiveData<ResponseStatus<Any>> get() = _singOutLiveData
 
-    private var _getLatitudeLiveData = MutableLiveData<String>()
-    val getLatitudeLiveData: LiveData<String> get() = _getLatitudeLiveData
 
-    private var _getLongitudeLiveData = MutableLiveData<String>()
-    val getLongitudeLiveData: LiveData<String> get() = _getLongitudeLiveData
-
-    var location: Location? = null
-
-
-    init {
+    fun saveLastLocation() {
         viewModelScope.launch {
-            location = helperGeolocation.getUserLocation()
+            helperGeolocation.getUserLocation().let { location->
+                if (location != null) {
+                    sharePreference.saveLatitude(location.latitude.toString())
+                    sharePreference.saveLongitude(location.longitude.toString())
+                }
+            }
         }
     }
+
+    fun getLatitude() = sharePreference.getLatitude() ?: ""
+    fun getLongitude() = sharePreference.getLongitude() ?: ""
 
     fun singOut() {
         viewModelScope.launch {
@@ -101,19 +98,6 @@ class HomeViewModel @Inject constructor(
 
     fun clearLivedata() {
         _getFavoriteFactsLiveData.value = null
-    }
-
-    fun getLatitude() {
-       if(location != null){
-           _getLatitudeLiveData.value = location!!.latitude.toString()
-       }
-    }
-
-    fun getLongitude() {
-        if(location != null){
-            _getLongitudeLiveData.value =
-                location!!.longitude.toString()
-        }
     }
 
     fun checkLocation() = helperGeolocation.isEnableGeolocation()

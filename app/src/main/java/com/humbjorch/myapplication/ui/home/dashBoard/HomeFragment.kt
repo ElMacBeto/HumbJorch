@@ -27,7 +27,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
 
-    private val viewModel: HomeViewModel by activityViewModels()
+    private val viewModel: HomeViewModel by viewModels()
     private val sessionViewModel: LoginSessionViewModel by viewModels()
     private lateinit var binding: FragmentHomeBinding
     private lateinit var factAdapter: FactsAdapter
@@ -52,6 +52,7 @@ class HomeFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        viewModel.saveLastLocation()
         viewModel.getFavoritesFacts()
     }
 

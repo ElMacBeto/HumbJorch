@@ -68,6 +68,8 @@
     <string name="latitude">Latitude: </string>
     <string name="longitude">Longitude: </string>
     <string name="label_permission_success">Permission granted successfully. Feel free to proceed. Thank you</string>
+    <string name="share_preferences_latitude">SHARE_PREFERENCES_LATITUDE</string>
+    <string name="share_preferences_longitude">SHARE_PREFERENCES_LONGITUDE</string>
 
 
 </resources>

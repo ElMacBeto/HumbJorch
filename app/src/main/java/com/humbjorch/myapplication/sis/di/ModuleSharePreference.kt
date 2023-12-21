@@ -24,7 +24,10 @@ class ModuleSharePreference @Inject constructor(private val context: Context) {
 
     @SuppressLint("CommitPrefEdits")
     fun saveEmailAndPassword(email: String, photo: String) {
-        sharedPreferencesSessionEdit.putString(context.getString(R.string.share_preferences_email), email)
+        sharedPreferencesSessionEdit.putString(
+            context.getString(R.string.share_preferences_email),
+            email
+        )
         sharedPreferencesSessionEdit.putString(
             context.getString(R.string.share_preferences_photo_url),
             photo
@@ -40,6 +43,7 @@ class ModuleSharePreference @Inject constructor(private val context: Context) {
         )
         sharedPreferencesSessionEdit.apply()
     }
+
     @SuppressLint("CommitPrefEdits")
     fun saveGoogleSession(touchId: Boolean) {
         sharedPreferencesSessionEdit.putBoolean(
@@ -48,6 +52,34 @@ class ModuleSharePreference @Inject constructor(private val context: Context) {
         )
         sharedPreferencesSessionEdit.apply()
     }
+
+    @SuppressLint("CommitPrefEdits")
+    fun saveLatitude(latitude: String) {
+        sharedPreferencesSessionEdit.putString(
+            context.getString(R.string.share_preferences_latitude),
+            latitude
+        )
+        sharedPreferencesSessionEdit.apply()
+    }
+
+    @SuppressLint("CommitPrefEdits")
+    fun saveLongitude(longitude: String) {
+        sharedPreferencesSessionEdit.putString(
+            context.getString(R.string.share_preferences_longitude),
+            longitude
+        )
+        sharedPreferencesSessionEdit.apply()
+    }
+
+    fun getLatitude() = shareSessionPreferences.getString(
+        context.getString(R.string.share_preferences_latitude),
+        ""
+    )
+
+    fun getLongitude() = shareSessionPreferences.getString(
+        context.getString(R.string.share_preferences_longitude),
+        ""
+    )
 
 
     fun getEmail() = shareSessionPreferences.getString(
@@ -59,10 +91,12 @@ class ModuleSharePreference @Inject constructor(private val context: Context) {
         context.getString(R.string.share_preferences_photo_url),
         ""
     )
+
     fun getTouchId() = shareSessionPreferences.getBoolean(
         context.getString(R.string.share_preferences_touch_id_session),
         false
     )
+
     fun getGoogleSession() = shareSessionPreferences.getBoolean(
         context.getString(R.string.share_preferences_google_session),
         false
